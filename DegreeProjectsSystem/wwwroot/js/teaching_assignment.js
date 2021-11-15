@@ -14,25 +14,25 @@ function loadDataTable() {
             "url": "/Admin/TeachingAssignment/GetAllTeachingAssignments"
         },
         "columns": [
-            { "data": "teachingAssignment.studentRequest.solicitude.titleDegreeWork" },
+            { "data": "solicitude.titleDegreeWork" },
             //{ "data": "teachingAssignment.studentRequest.solicitude.actNumber" },
             //{ "data": "teachingAssignment.studentRequest.person.names"},
             //{ "data": "teachingAssignment.studentRequest.person.surnames",},
             {
                 "data": "active",
                 "render": function (data) {
-                active = data;
-                if (data) {
-                    return `
+                    active = data;
+                    if (data) {
+                        return `
                                 <div class="status-active text-center">Activo</div>
                             `
-                }
-                else {
-                    return `      
+                    }
+                    else {
+                        return `      
                                 <div class="status-inactive text-center">Inactivo</div>
                             `
-                }
-            }, 
+                    }
+                },
             },
             {
                 "data": "id",
@@ -68,7 +68,7 @@ function loadDataTable() {
                          </div >
                          `;
                     }
-                }, 
+                },
             }
         ]
     });

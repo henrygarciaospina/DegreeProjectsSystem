@@ -729,11 +729,11 @@ namespace DegreeProjectsSystem.DataAccess.Migrations
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("AssigmentDate")
-                        .HasColumnType("datetime2")
-                        .HasMaxLength(200);
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Observations")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
 
                     b.Property<int>("PersonTypePersonId")
                         .HasColumnType("int");

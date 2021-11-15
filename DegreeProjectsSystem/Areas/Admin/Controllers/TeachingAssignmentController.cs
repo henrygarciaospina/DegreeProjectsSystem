@@ -38,24 +38,24 @@ namespace DegreeProjectsSystem.Areas.Admin.Controllers
 
         public IActionResult InsertOrUpdateTeachingAssignment(int? id)
         {
-            var TeacherTypeId = from config in _db.Configs
-                                select new
-                                {
-                                    config.TeacherTypeId
-                                };
+            var config = _unitWork.Config.GetFirst();
 
             TeachingAssignmentViewModel teachingAssignmentViewModel = new TeachingAssignmentViewModel()
             {
 
                 TeachingAssignment = new TeachingAssignment(),
 
-                StudentRequestList = _unitWork.StudentRequest.GetAll().Select(sr => new SelectListItem
+                StudentRequestList = _unitWork.StudentRequest
+                .GetAll(includeProperties: "Solicitude")
+                .Select(sr => new SelectListItem
                 {
-                    Text = sr.Person.IdentificationNumber,
-                    Value = sr.Person.Id.ToString()
+                    Text = sr.Solicitude.TitleDegreeWork,
+                    Value = sr.Solicitude.Id.ToString()
                 }).ToList(),
 
-                PersonTypePersonList = _unitWork.PersonTypePerson.GetAll(pe => pe.TypePerson.Equals(TeacherTypeId)).Select(pe => new SelectListItem
+                PersonTypePersonList = _unitWork.PersonTypePerson.GetAll(
+                    pe => pe.TypePerson.Id == config.TeacherTypeId,
+                    includeProperties: "Person").Select(pe => new SelectListItem
                 {
                     Text = pe.Person.Names,
                     Value = pe.Person.Id.ToString()
@@ -171,30 +171,32 @@ namespace DegreeProjectsSystem.Areas.Admin.Controllers
 
         public ViewResult LoadLists(TeachingAssignmentViewModel teachingAssignmentViewModel, string message)
         {
-            var TeacherTypeId = from config in _db.Configs
-                                select new
-                                {
-                                    config.TeacherTypeId
-                                };
+           // var TeacherTypeId = from config in _db.Configs
+                                //select new
+                                //{
+                                //    config.TeacherTypeId
+                                //};
 
-            teachingAssignmentViewModel.StudentRequestList = _unitWork.StudentRequest.GetAll().Select(sr => new SelectListItem
+            teachingAssignmentViewModel.StudentRequestList = _unitWork.StudentRequest
+                .GetAll(includeProperties: "Solicitude")
+                .Select(sr => new SelectListItem
             {
                 Text = sr.Person.IdentificationNumber,
                 Value = sr.Person.Id.ToString()
             }).ToList();
 
-            teachingAssignmentViewModel.PersonTypePersonList = _unitWork.PersonTypePerson.GetAll(pe => pe.TypePerson.Id.Equals(TeacherTypeId)).Select(pe => new SelectListItem
-            {
-                Text = pe.Person.Names + " " + pe.Person.Surnames,
-                Value = pe.Person.Id.ToString()
-            });
+            //teachingAssignmentViewModel.PersonTypePersonList = _unitWork.PersonTypePerson.GetAll(pe => pe.TypePerson.Id.Equals(TeacherTypeId)).Select(pe => new SelectListItem
+            //{
+            //    Text = pe.Person.Names + " " + pe.Person.Surnames,
+            //    Value = pe.Person.Id.ToString()
+            //});
 
 
-            teachingAssignmentViewModel.TeachingFunctionList = _unitWork.TeachingFunction.GetAll(tf => tf.Active == true, orderBy: tf => tf.OrderBy(tf => tf.Name)).Select(tf => new SelectListItem
-            {
-                Text = tf.Name,
-                Value = tf.Id.ToString()
-            });
+            //teachingAssignmentViewModel.TeachingFunctionList = _unitWork.TeachingFunction.GetAll(tf => tf.Active == true, orderBy: tf => tf.OrderBy(tf => tf.Name)).Select(tf => new SelectListItem
+            //{
+            //    Text = tf.Name,
+            //    Value = tf.Id.ToString()
+            //});
 
             if (!string.IsNullOrEmpty(message))
             {

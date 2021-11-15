@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DegreeProjectsSystem.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211115022004_AddTableConfigToDatabaseAndUpdateModelTeachingAssignment")]
+    [Migration("20211115230328_AddTableConfigToDatabaseAndUpdateModelTeachingAssignment")]
     partial class AddTableConfigToDatabaseAndUpdateModelTeachingAssignment
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -731,11 +731,11 @@ namespace DegreeProjectsSystem.DataAccess.Migrations
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("AssigmentDate")
-                        .HasColumnType("datetime2")
-                        .HasMaxLength(200);
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Observations")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
 
                     b.Property<int>("PersonTypePersonId")
                         .HasColumnType("int");

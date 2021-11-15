@@ -10,6 +10,7 @@ namespace DegreeProjectsSystem.DataAccess.Repository
         public ICareerRepository Career { get; private set; }
         public ICareerPersonRepository CareerPerson { get; private set; }
         public ICityRepository City { get; private set; }
+        public IConfigRepository Config { get; private set; }
         public IDepartmentRepository Department { get; private set; }
         public IDepartmentFacultyRepository DepartmentFaculty { get; private set; }
         public IInstitutionRepository Institution { get; private set; }
@@ -40,6 +41,7 @@ namespace DegreeProjectsSystem.DataAccess.Repository
             Career = new CareerRepository(_db); // Inicializamos
             CareerPerson = new CareerPersonRepository(_db);
             City = new CityRepository(_db);
+            Config = new ConfigRepository(_db);
             Department = new DepartmentRepository(_db);
             DepartmentFaculty = new DepartmentFacultyRepository(_db);
             EducationLevel = new EducationLevelRepository(_db);
