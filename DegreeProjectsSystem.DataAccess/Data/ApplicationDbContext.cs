@@ -15,6 +15,7 @@ namespace DegreeProjectsSystem.DataAccess.Data
         public DbSet<Career> Careers { get; set; }
         public DbSet<CareerPerson> CareerPeople { get; set; }
         public DbSet<City> Cities { get; set; }
+        public DbSet<Config> Configs { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<DepartmentFaculty> DepartmentFaculties { get; set; }
         public DbSet<EmailPerson> EmailPeople { get; set; }
@@ -131,7 +132,7 @@ namespace DegreeProjectsSystem.DataAccess.Data
                .IsUnique();
 
             modelBuilder.Entity<TeachingAssignment>()
-               .HasIndex(ta => new { ta.PersonId })
+               .HasIndex(ta => new { ta.PersonTypePersonId})
                .IsUnique();
 
             modelBuilder.Entity<TeachingFunction>()

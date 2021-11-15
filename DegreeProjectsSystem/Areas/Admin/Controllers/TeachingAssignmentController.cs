@@ -38,27 +38,34 @@ namespace DegreeProjectsSystem.Areas.Admin.Controllers
 
         public IActionResult InsertOrUpdateTeachingAssignment(int? id)
         {
+            var TeacherTypeId = from config in _db.Configs
+                                select new
+                                {
+                                    config.TeacherTypeId
+                                };
+
             TeachingAssignmentViewModel teachingAssignmentViewModel = new TeachingAssignmentViewModel()
             {
+
                 TeachingAssignment = new TeachingAssignment(),
 
-                StudentRequestList = _unitWork.StudentRequest.GetAll(sr => sr.Active == true, orderBy: sr => sr.OrderBy(sr => sr.Solicitude.TitleDegreeWork)).Select(sr => new SelectListItem
+                StudentRequestList = _unitWork.StudentRequest.GetAll().Select(sr => new SelectListItem
                 {
-                    Text = sr.Solicitude.TitleDegreeWork + " " + sr.Person.IdentificationNumber,
-                    Value = sr.SolicitudeId.ToString()
+                    Text = sr.Person.IdentificationNumber,
+                    Value = sr.Person.Id.ToString()
                 }).ToList(),
 
-                PersonList = _unitWork.Person.GetAll(pe => pe.Active == true, orderBy: pe => pe.OrderBy(pe => pe.Surnames + pe.Names)).Select(pe => new SelectListItem
+                PersonTypePersonList = _unitWork.PersonTypePerson.GetAll(pe => pe.TypePerson.Equals(TeacherTypeId)).Select(pe => new SelectListItem
                 {
-                    Text = pe.Names + " " + pe.Surnames,
-                    Value = pe.Id.ToString()
-                }).ToList(),
+                    Text = pe.Person.Names,
+                    Value = pe.Person.Id.ToString()
+                }),
 
-                TeachingFunctionList = _unitWork.TeachingFunction.GetAll(tf => tf.Active == true, orderBy: tf => tf.OrderBy(tf => tf.Name)).Select(tf => new SelectListItem
+                TeachingFunctionList = _unitWork.TeachingFunction.GetAll(tf => tf.Active, orderBy: tf => tf.OrderBy(tf => tf.Name)).Select(tf => new SelectListItem
                 {
                     Text = tf.Name,
                     Value = tf.Id.ToString()
-                }).ToList(),
+                }),
             };
 
             // Crea un nuevo registro
@@ -164,24 +171,30 @@ namespace DegreeProjectsSystem.Areas.Admin.Controllers
 
         public ViewResult LoadLists(TeachingAssignmentViewModel teachingAssignmentViewModel, string message)
         {
-            teachingAssignmentViewModel.StudentRequestList = _unitWork.StudentRequest.GetAll(sr => sr.Active == true, orderBy: sr => sr.OrderBy(sr => sr.Solicitude.TitleDegreeWork)).Select(sr => new SelectListItem
+            var TeacherTypeId = from config in _db.Configs
+                                select new
+                                {
+                                    config.TeacherTypeId
+                                };
+
+            teachingAssignmentViewModel.StudentRequestList = _unitWork.StudentRequest.GetAll().Select(sr => new SelectListItem
             {
-                Text = sr.Solicitude.TitleDegreeWork,
-                Value = sr.SolicitudeId.ToString()
+                Text = sr.Person.IdentificationNumber,
+                Value = sr.Person.Id.ToString()
             }).ToList();
 
-            teachingAssignmentViewModel.PersonList = _unitWork.Person.GetAll(orderBy: pe => pe.OrderBy(pe => pe.Surnames + pe.Names)).Select(pe => new SelectListItem
+            teachingAssignmentViewModel.PersonTypePersonList = _unitWork.PersonTypePerson.GetAll(pe => pe.TypePerson.Id.Equals(TeacherTypeId)).Select(pe => new SelectListItem
             {
-                Text = pe.Names + " " + pe.Surnames,
-                Value = pe.Id.ToString()
-            }).ToList();
+                Text = pe.Person.Names + " " + pe.Person.Surnames,
+                Value = pe.Person.Id.ToString()
+            });
 
 
             teachingAssignmentViewModel.TeachingFunctionList = _unitWork.TeachingFunction.GetAll(tf => tf.Active == true, orderBy: tf => tf.OrderBy(tf => tf.Name)).Select(tf => new SelectListItem
             {
                 Text = tf.Name,
                 Value = tf.Id.ToString()
-            }).ToList();
+            });
 
             if (!string.IsNullOrEmpty(message))
             {
@@ -197,7 +210,7 @@ namespace DegreeProjectsSystem.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAllTeachingAssignments()
         {
-            var teachingAssignments = _unitWork.TeachingAssignment.GetAll(includeProperties: "StudentRequest,Person,TeachingFunction");
+            var teachingAssignments = _unitWork.TeachingAssignment.GetAll(includeProperties: "StudentRequest,PersonTypePerson,TeachingFunction");
             return Json(new { data = teachingAssignments });
         }
 

@@ -61,7 +61,7 @@ namespace DegreeProjectsSystem.DataAccess.Repository
             Submodality = new SubmodalityRepository(_db);
             ModalitySubmodality = new ModalitySubmodalityRepository(_db);
             TeachingFunction = new TeachingFunctionRepository(_db);
-            //TeachingAssignment = new TeachingAssignmentRepository(_db);
+            TeachingAssignment = new TeachingAssignmentRepository(_db);
             TypePerson = new TypePersonRepository(_db);
         }
 

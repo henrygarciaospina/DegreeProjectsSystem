@@ -34,13 +34,13 @@
         </div>
         <div class="form-group row">
             <div class="col-4 mb-3">
-                <label asp-for="TeachingAssignment.Person.Names"></label>
+                <label asp-for="TeachingAssignment.PersonTypePerson.Person.Names"></label>
             </div>
             <div class="col-8 mb-3">
-                @Html.DropDownListFor(ta => ta.TeachingAssignment.PersonId, Model.PersonList,
+                @Html.DropDownListFor(ta => ta.TeachingAssignment.PersonTypePerson.PersonId, Model.PersonTypePersonList,
                        "Seleccione un docente....",
                        new { @class = "form-control" })
-                <span asp-validation-for="TeachingAssignment.PersonId" class="text-danger"></span>
+                <span asp-validation-for="TeachingAssignment.PersonTypePerson.PersonId" class="text-danger"></span>
             </div>
         </div>
         <div class="row">
@@ -109,7 +109,5 @@
             var year = date.getFullYear().toString().slice(2);
             return day + '-' + month + '-' + year;
         }
-
-
     </script>
 }

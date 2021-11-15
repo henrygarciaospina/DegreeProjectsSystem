@@ -44,7 +44,7 @@ namespace DegreeProjectsSystem.Areas.Admin.Controllers
 
                 SolicitudeList = _unitWork.Solicitude.GetAll(sl => sl.Active == true, orderBy: sl => sl.OrderBy(sl => sl.TitleDegreeWork)).Select(sl => new SelectListItem
                 {
-                    Text = sl.TitleDegreeWork,
+                    Text = sl.TitleDegreeWork + " - " + "Acta No. " + sl.ActNumber,
                     Value = sl.Id.ToString()
                 }).ToList(),
 
@@ -158,10 +158,10 @@ namespace DegreeProjectsSystem.Areas.Admin.Controllers
 
         public ViewResult LoadLists(StudentRequestViewModel studentRequestViewModel, string message)
         {
-            studentRequestViewModel.SolicitudeList = _unitWork.Solicitude.GetAll().Select(so => new SelectListItem
+            studentRequestViewModel.SolicitudeList = _unitWork.Solicitude.GetAll().Select(sl => new SelectListItem
             {
-                Text = so.TitleDegreeWork,
-                Value = so.Id.ToString()
+                Text = sl.TitleDegreeWork + " - " + "Acta No. " + sl.ActNumber,
+                Value = sl.Id.ToString()
             }).ToList();
 
             studentRequestViewModel.PersonList = _unitWork.Person.GetAll(pe => pe.Active == true, orderBy: pe => pe.OrderBy(pe => pe.Surnames + pe.Names)).Select(pe => new SelectListItem

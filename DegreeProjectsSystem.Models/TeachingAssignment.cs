@@ -18,12 +18,12 @@ namespace DegreeProjectsSystem.Models
         public StudentRequest StudentRequest { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Debe seleccionar un Docente")]
-        public int PersonId { get; set; }
+        public int PersonTypePersonId { get; set; }
 
         [Display(Name = "Nombres y Apellidos")]
         //Foreign key
-        [ForeignKey("PersonId")]
-        public Person Person { get; set; }
+        [ForeignKey("PersonTypePersonId")]
+        public PersonTypePerson PersonTypePerson { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Debe seleccionar una función Docente")]
         public int TeachingFunctionId { get; set; }
@@ -33,10 +33,13 @@ namespace DegreeProjectsSystem.Models
         [ForeignKey("TeachingFunctionId")]
         public TeachingFunction TeachingFunction { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime AssigmentDate { get; set; }
+
         [MaxLength(200, ErrorMessage = "El campo {0} debe tener menos de {1} caracteres")]
         [DataType(DataType.MultilineText)]
         [Display(Name = "Observaciones")]
-        public DateTime AssigmentDate { get; set; }
         public string Observations { get; set; }
 
         [Display(Name = "Estado")]

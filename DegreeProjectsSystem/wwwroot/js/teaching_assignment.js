@@ -15,9 +15,9 @@ function loadDataTable() {
         },
         "columns": [
             { "data": "teachingAssignment.studentRequest.solicitude.titleDegreeWork" },
-            { "data": "teachingAssignment.studentRequest.solicitude.actNumber" },
-            { "data": "teachingAssignment.studentRequest.person.names"},
-            { "data": "teachingAssignment.studentRequest.person.surnames",},
+            //{ "data": "teachingAssignment.studentRequest.solicitude.actNumber" },
+            //{ "data": "teachingAssignment.studentRequest.person.names"},
+            //{ "data": "teachingAssignment.studentRequest.person.surnames",},
             {
                 "data": "active",
                 "render": function (data) {
@@ -32,7 +32,7 @@ function loadDataTable() {
                                 <div class="status-inactive text-center">Inactivo</div>
                             `
                 }
-            }, "width": "10%"
+            }, 
             },
             {
                 "data": "id",

@@ -7,7 +7,7 @@ namespace DegreeProjectsSystem.Models.ViewModels
     {
         public TeachingAssignment TeachingAssignment { get; set; }
         public IEnumerable<SelectListItem> StudentRequestList { get; set; }
-        public IEnumerable<SelectListItem> PersonList { get; set; }
+        public IEnumerable<SelectListItem> PersonTypePersonList { get; set; }
         public IEnumerable<SelectListItem> TeachingFunctionList { get; set; }
     }
 }

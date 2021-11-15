@@ -17,15 +17,24 @@ namespace DegreeProjectsSystem.DataAccess.Repository
         public void Update(TeachingAssignment teachingAssignment)
         {
             var teachingAssignmentDb = _db.TeachingAssigments.FirstOrDefault(ta => ta.Id == teachingAssignment.Id);
-            if (teachingAssignmentDb != null)
+            try
             {
-                teachingAssignmentDb.StudentRequest.Id = teachingAssignment.StudentRequestId;
-                teachingAssignmentDb.PersonId = teachingAssignment.PersonId;
-                teachingAssignmentDb.TeachingFunctionId = teachingAssignment.TeachingFunctionId;
-                teachingAssignmentDb.AssigmentDate = teachingAssignment.AssigmentDate;
-                teachingAssignmentDb.Observations = teachingAssignment.Observations;
-                teachingAssignmentDb.Active = teachingAssignment.Active;
+                if (teachingAssignmentDb != null)
+                {
+                    teachingAssignmentDb.StudentRequest.Id = teachingAssignment.StudentRequestId;
+                    teachingAssignmentDb.PersonTypePersonId = teachingAssignment.PersonTypePersonId;
+                    teachingAssignmentDb.TeachingFunctionId = teachingAssignment.TeachingFunctionId;
+                    teachingAssignmentDb.AssigmentDate = teachingAssignment.AssigmentDate;
+                    teachingAssignmentDb.Observations = teachingAssignment.Observations;
+                    teachingAssignmentDb.Active = teachingAssignment.Active;
+                }
             }
+            catch (System.Exception ex)
+            {
+
+                throw(ex);
+            }
+            
         }
 
     }
