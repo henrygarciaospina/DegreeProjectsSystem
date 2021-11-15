@@ -1,0 +1,299 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - DegreeProjectsSystem</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <link rel="stylesheet" href="~/css/bootstrap-datetimepicker.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark border-bottom box-shadow mb-3 fixed-top">
+            <div class="container font-menu">
+                <span class="m-1"><img src="~/img/logoITM.png" width="50" height="40" alt="logo" /></span>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <span class="text-nowrap shadow-title">DegreeProjectsSystem</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <partial name="_LoginPartial" />
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacidad</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Tablas Maestras
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="InstitutionContactCharge" asp-action="Index">
+                                    <i class="fas fa-id-card-alt">
+                                        <span class="p-1 font-menu">
+                                            Cargo Contactos Instituciones
+                                        </span>
+                                    </i>
+                                </a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="InstitutionContact" asp-action="Index">
+                                    <i class="fas fa-address-card">
+                                        <span class="p-1 font-menu">
+                                            Contactos Instituciones
+                                        </span>
+                                    </i>
+                                </a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="Department" asp-action="Index">
+                                    <i class="fas fa-flag">
+                                        <span class="p-1 font-menu">
+                                            Departamentos
+                                        </span>
+                                    </i>
+                                </a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="Faculty" asp-action="Index">
+                                    <i class="fas fa-school">
+                                        <span class="p-1 font-menu">
+                                            Facultades
+                                        </span>
+                                    </i>
+                                </a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="TeachingFunction" asp-action="Index">
+                                    <i class="fas fa-chalkboard-teacher">
+                                        <span class="p-1 font-menu">
+                                            Función Docente
+                                        </span>
+                                    </i>
+                                </a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="Gender" asp-action="Index">
+                                    <i class="fas fa-venus-mars">
+                                        <span class="p-1 font-menu">
+                                            Géneros
+                                        </span>
+                                    </i>
+                                </a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="EducationLevel" asp-action="Index">
+                                    <i class="fas fa-graduation-cap">
+                                        <span class="p-1 font-menu">
+                                            Níveles Educativos
+                                        </span>
+                                    </i>
+                                </a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="Submodality" asp-action="Index">
+                                    <i class="fab fa-staylinked">
+                                        <span class="p-1 font-menu">
+                                            Submodalidades
+                                        </span>
+                                    </i>
+                                </a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="IdentityDocumentType" asp-action="Index">
+                                    <i class="fas fa-id-card">
+                                        <span class="p-1 font-menu">
+                                            Tipo Documento Identidad
+                                        </span>
+                                    </i>
+                                </a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="InstitutionType" asp-action="Index">
+                                    <i class="fas fa-warehouse">
+                                        <span class="p-1 font-menu">
+                                            Tipo De Institución
+                                        </span>
+                                    </i>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Tablas Relacionadas
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="TeachingAssignment" asp-action="Index">
+                                    <i class="fas fa-chalkboard-teacher">
+                                        <span class="p-1 font-menu">
+                                            Asignación Docente
+                                        </span>
+                                    </i>
+                                </a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="EmailPerson" asp-action="Index">
+                                    <i class="fas fa-envelope">
+                                        <span class="p-1 font-menu">
+                                            Correos Personas
+                                        </span>
+                                    </i>
+                                </a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="City" asp-action="Index">
+                                    <i class="fas fa-city">
+                                        <span class="p-1 font-menu">
+                                            Ciudades
+                                        </span>
+                                    </i>
+                                </a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="DepartmentFaculty" asp-action="Index">
+                                    <i class="fas fa-university"></i>
+                                    <span class="p-1 font-menu">
+                                        Departamentos De Facultad
+                                    </span>
+                                </a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="Institution" asp-action="Index">
+                                    <i class="fas fa-dungeon">
+                                        <span class="p-1 font-menu">
+                                            Instituciones
+                                        </span>
+                                    </i>
+                                </a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="Modality" asp-action="Index">
+                                    <i class="fab fa-magento">
+                                        <span class="p-1 font-menu">
+                                            Modalidades
+                                        </span>
+                                    </i>
+                                </a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="ModalitySubmodality" asp-action="Index">
+                                    <i class="fas fa-user-graduate">
+                                        <span class="p-1 font-menu">
+                                            Modalidades/Submodalidades
+                                        </span>
+                                    </i>
+                                </a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="Person" asp-action="Index">
+                                    <i class="fas fa-user-tie">
+                                        <span class="p-1 font-menu">
+                                            Personas
+                                        </span>
+                                    </i>
+                                </a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="PersonTypePerson" asp-action="Index">
+                                    <i class="fas fa-meh">
+                                        <span class="p-1 font-menu">
+                                            Persona (Tipo de Persona)
+                                        </span>
+                                    </i>
+                                </a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="Career" asp-action="Index">
+                                    <i class="far fa-newspaper">
+                                        <span class="p-1 font-menu">
+                                            Programas
+                                        </span>
+                                    </i>
+                                </a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="CareerPerson" asp-action="Index">
+                                    <i class="fas fa-chalkboard-teacher">
+                                        <span class="p-1 font-menu">
+                                            Programas Persona
+                                        </span>
+                                    </i>
+                                </a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="Recognition" asp-action="Index">
+                                    <i class="fas fa-award">
+                                        <span class="p-1 font-menu">
+                                            Reconocimientos
+                                        </span>
+                                    </i>
+                                </a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="Solicitude" asp-action="Index">
+                                    <i class="fas fa-graduation-cap">
+                                        <span class="p-1 font-menu">
+                                            Solicitud Trabajo Grado
+                                        </span>
+                                    </i>
+                                </a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="StudentRequest" asp-action="Index">
+                                    <i class="fas fa-file-invoice">
+                                        <span class="p-1 font-menu">
+                                            Solicitud de Estudiantes
+                                        </span>
+                                    </i>
+                                </a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="TypePerson" asp-action="Index">
+                                    <i class="fas fa-user-friends">
+                                        <span class="p-1 font-menu">
+                                            Tipo De Persona
+                                        </span>
+                                    </i>
+                                </a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="ProgramType" asp-action="Index">
+                                    <i class="fas fa-book">
+                                        <span class="p-1 font-menu">
+                                            Tipos De Programa
+                                        </span>
+                                    </i>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Maestros Detalle
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Reportes
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Usuarios
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Index">
+                                    <i class="fas fa-id-card-alt">
+                                        <span class="p-1 font-menu">
+                                            Usuarios
+                                        </span>
+                                    </i>
+                                </a>
+                            </div>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-white-50">
+        <div class="container shadow-title">
+            &copy;  DegreeProjectsSystem - @DateTime.Today.ToString("dd/MM/yyyy")
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script src="https://kit.fontawesome.com/e19c476714.js"></script>
+
+    <script src="~/js/bootstrap-datetimepicker.js"></script>
+    @await Component.InvokeAsync("Notyf")
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,76 @@
+﻿@model DegreeProjectsSystem.Models.Solicitude
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = "Detalle Solicitud";
+}
+<div class="container-fluid">
+    <div class="container-detail mt-3">
+        <div class="card-detail ml-1">
+            <div class="col-12 px-2 border-bottom">
+                <div class="wrapped">
+                    <h2 class="text-primary">@title</h2>
+                </div>
+            </div>
+
+            <div class="row mt-2 px-2">
+                <div class="col-sm-6">
+                    <label class="fw-bold" asp-for="TitleDegreeWork"></label>
+                    <textarea asp-for="TitleDegreeWork" disabled class="form-control" rows="4">
+                    </textarea>
+                </div>
+                <div class="col-sm-6">
+                    <div class="col-sm-12">
+                        <label class="fw-bold" asp-for="ActNumber"></label>
+                        <input asp-for="ActNumber" disabled class="form-control" />
+                    </div>
+                    <div class="col-sm-12">
+                        <label asp-for="ActDate" class="control-label fw-bold"></label>
+                        <input id="datePicker" asp-for="ActDate" type="text" disabled class="form-control" name="ActDate" />
+                    </div>
+                </div>
+            </div>
+            <div class="row px-2">
+                <div class="col-sm-6">
+                    <div class="col-sm-12">
+                        <div class="checkbox">
+                            <span class="">
+                                <label asp-for="ModalityChange" class="control-label fw-bold"></label>
+                            </span>
+                            <span class="align-content-center">
+                                <br />
+                                <input asp-for="ModalityChange" disabled />
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <span class="fw-bold">
+                            <label asp-for="Active"></label>
+                        </span>
+                        <select asp-for="Active" disabled class="form-control">
+                            <option value=true>Activo</option>
+                            <option value=false>Inactivo</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-6 mb-3">
+                    <span class="">
+                        <label class="fw-bold" asp-for="Observations"></label>
+                    </span>
+                    <textarea asp-for="Observations" disabled class="form-control" rows="4">
+                    </textarea>
+                </div>
+            </div>
+        </div>
+        <div class="form-group ml-2 mt-2">
+            <div class="col-8 offset-2">
+                <div class="row">
+                    <div class="col">
+                        <a asp-action="Index" class="btn btn-success form-control">
+                            <i class="far fa-hand-point-left"><span class="ml-1 font-menu">Regresar</span></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

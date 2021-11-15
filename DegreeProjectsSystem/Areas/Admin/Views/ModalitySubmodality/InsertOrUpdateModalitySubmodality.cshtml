@@ -1,0 +1,77 @@
+﻿@model DegreeProjectsSystem.Models.ViewModels.ModalitySubmodalityViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = "Crear Submodalidad a la Modalidad";
+}
+
+<form method="post">
+    <div class="row p-3 border-0">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    </div>
+    @if (Model.ModalitySubmodality.Id != 0)
+    {
+        // Actualizar
+        title = "Actualizar Submodalidad/Modalidad";
+        <input type="hidden" asp-for="ModalitySubmodality.Id" />
+    }
+
+    <div class="col-12 border-bottom mt-5">
+        <h2 class="text-primary">@title</h2>
+    </div>
+    <div class="col-8 pt-4">
+        <div class="form-group row">
+            <div class="col-4 mb-3">
+                <label asp-for="ModalitySubmodality.Modality.Name"></label>
+            </div>
+            <div class="col-8 mb-3">
+                @Html.DropDownListFor(mo => mo.ModalitySubmodality.ModalityId, Model.ModalityList,
+                "Seleccione una modalidad....",
+                new { @class = "form-control" })
+                <span asp-validation-for="ModalitySubmodality.ModalityId" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-4 mb-3">
+                <label asp-for="ModalitySubmodality.Submodality.Name"></label>
+            </div>
+            <div class="col-8 mb-3">
+                @Html.DropDownListFor(su => su.ModalitySubmodality.SubmodalityId, Model.SubmodalityList,
+                "Seleccione una submodalidad....",
+                new { @class = "form-control" })
+                <span asp-validation-for="ModalitySubmodality.SubmodalityId" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-4 mb-3">
+                <label asp-for="ModalitySubmodality.Active"></label>
+            </div>
+            <div class="col-4 mb-3">
+                <select asp-for="ModalitySubmodality.Active" class="form-control">
+                    <option value=true>Activo</option>
+                    <option value=false>Inactivo</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row mb-3">
+            <div class="col-8 offset-4">
+                @if (Model.ModalitySubmodality.Id != 0)
+                {
+                    <partial name="_ButtonsUpdateAndReturn" model="Model.ModalitySubmodality.Id" />
+                }
+                else
+                {
+                    <partial name="_ButtonsCreateAndReturn" />
+                }
+            </div>
+        </div>
+
+    </div>
+
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
