@@ -27,7 +27,7 @@
             </div>
             <div class="col-8 mb-3">
                 @Html.DropDownListFor(ta => ta.TeachingAssignment.StudentRequest.SolicitudeId, Model.StudentRequestList,
-                "Seleccione una solictud....",
+                "Seleccione una solicitud....",
                 new { @class = "form-control" })
                 <span asp-validation-for="TeachingAssignment.StudentRequest.SolicitudeId" class="text-danger"></span>
             </div>
@@ -57,14 +57,14 @@
             </div>
             <div class="col-sm-12">
                 <label asp-for="TeachingAssignment.AssigmentDate" class="control-label"></label>
-                <input id="datePicker" asp-for="TeachingAssignment.AssigmentDate" type="text" class="form-control" name="ActDate" />
+                <input id="datePicker" asp-for="TeachingAssignment.AssigmentDate" type="date" class="form-control" name="ActDate" />
                 <span asp-validation-for="TeachingAssignment.AssigmentDate" class="text-danger"></span>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-6">
                 <label asp-for="TeachingAssignment.Observations"></label>
-                <textarea asp-for="TeachingAssignment.Observations" class="form-control" rows="4" placeholder="Ejemplo: Correo corporativo.">
+                <textarea asp-for="TeachingAssignment.Observations" class="form-control" rows="4" placeholder="Ejemplo: Docente expero en el tema.">
             </textarea>
             </div>
             <div class="col-sm-6">
@@ -97,17 +97,4 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-    <script>
-        $('#datePicker').datetimepicker({
-            format: 'dd/mm/yyyy',
-            minDate: getFormattedDate(new Date())
-        });
-
-        function getFormattedDate(date) {
-            var day = date.getDate();
-            var month = date.getMonth() + 1;
-            var year = date.getFullYear().toString().slice(2);
-            return day + '-' + month + '-' + year;
-        }
-    </script>
 }
