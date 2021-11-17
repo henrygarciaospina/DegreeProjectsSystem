@@ -21,8 +21,8 @@ namespace DegreeProjectsSystem.DataAccess.Repository
             {
                 if (teachingAssignmentDb != null)
                 {
-                    teachingAssignmentDb.StudentRequest.Id = teachingAssignment.StudentRequest.Id;
-                    teachingAssignmentDb.PersonTypePerson.Id = teachingAssignment.PersonTypePerson.Id;
+                    teachingAssignmentDb.StudentRequest.SolicitudeId = teachingAssignment.StudentRequest.SolicitudeId;
+                    teachingAssignmentDb.PersonTypePerson.TypePersonId = teachingAssignment.PersonTypePerson.TypePersonId;
                     teachingAssignmentDb.TeachingFunction.Id = teachingAssignment.TeachingFunction.Id;
                     teachingAssignmentDb.AssigmentDate = teachingAssignment.AssigmentDate;
                     teachingAssignmentDb.Observations = teachingAssignment.Observations;

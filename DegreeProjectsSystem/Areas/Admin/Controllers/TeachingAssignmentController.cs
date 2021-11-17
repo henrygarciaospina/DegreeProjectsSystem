@@ -5,7 +5,6 @@ using DegreeProjectsSystem.Models;
 using DegreeProjectsSystem.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 
@@ -46,12 +45,12 @@ namespace DegreeProjectsSystem.Areas.Admin.Controllers
                 TeachingAssignment = new TeachingAssignment(),
 
                 StudentRequestList = _unitWork.StudentRequest
-                .GetAll(includeProperties: "Solicitude")
+                .GetAll(includeProperties: "Solicitude").Distinct()
                 .Select(sr => new SelectListItem
                 {
                     Text = sr.Solicitude.TitleDegreeWork + " Acta No. " + sr.Solicitude.ActNumber,
                     Value = sr.Solicitude.Id.ToString()
-                }).Distinct().ToList(),
+                }),
 
                 PersonTypePersonList = _unitWork.PersonTypePerson
                 .GetAll(pe => pe.TypePerson.Id == config.TeacherTypeId, includeProperties: "Person")
@@ -99,32 +98,13 @@ namespace DegreeProjectsSystem.Areas.Admin.Controllers
                 if (teachingAssignmentViewModel.TeachingAssignment.Id == 0)
                 {
                     action = Action.Create;
-                    try
-                    {
-                        _unitWork.TeachingAssignment.Add(teachingAssignmentViewModel.TeachingAssignment);
-                    }
-                    catch (Exception ex)
-                    {
-                        msg = "El docente ingresado ya se encuentra asignado a esta solicitud" + ex.Message.ToString();
-                        LoadLists(teachingAssignmentViewModel, msg);
-                    }
-
+                    _unitWork.TeachingAssignment.Add(teachingAssignmentViewModel.TeachingAssignment);
                 }
                 else
                 {
                     action = Action.Update;
-                    try
-                    {
-                        _unitWork.TeachingAssignment.Update(teachingAssignmentViewModel.TeachingAssignment);
-                    }
-                    catch (Exception)
-                    {
-                        msg = "El docente ingresado ya se encuentra asignado a esta solicitud";
-                        LoadLists(teachingAssignmentViewModel, msg);
-                    }
-
+                    _unitWork.TeachingAssignment.Update(teachingAssignmentViewModel.TeachingAssignment);
                 }
-
                 try
                 {
                     _unitWork.Save();
@@ -138,29 +118,32 @@ namespace DegreeProjectsSystem.Areas.Admin.Controllers
                     }
 
                     return RedirectToAction(nameof(Index));
+
                 }
-                catch (DbUpdateException dbUpdateException)
+               // catch (DbUpdateException dbUpdateException)
+               catch (Exception ex)
                 {
-                    if (dbUpdateException.InnerException.Message.Contains("IX_TeachingAssigments_PersonTypePersonId"))
-                    {
-                        var msg = "El docente ingresado ya se encuentra asignado a esta solicitud";
-                        LoadLists(teachingAssignmentViewModel, msg);
-                    }
-                    else
-                    {
-                        var msg = "El docente ingresado ya se encuentra asignado a esta solicitud";
-                        LoadLists(teachingAssignmentViewModel, msg);
-                    }
+                    throw ex;
+
+                    //if (dbUpdateException.InnerException.Message.Contains("IX_TeachingAssigments_PersonTypePersonId"))
+                    
+                    //{
+                    //    var msg = "El docente ingresado ya se encuentra asignado a esta solicitud";
+                    //    LoadLists(teachingAssignmentViewModel, msg);
+                    //}
+                    //else
+                    //{
+                    //    ModelState.AddModelError(string.Empty, dbUpdateException.InnerException.Message);
+                    //}
                 }
-                catch (Exception exception)
-                {
-                    var msg = $"Se produjo un error de base de datos { exception}";
-                    LoadLists(teachingAssignmentViewModel, msg);
-                }
+                //catch (Exception exception)
+                //{
+                //    ModelState.AddModelError(string.Empty, exception.Message);
+                //}
             }
             else
             {
-                var msg = " ";
+                var msg = "";
                 LoadLists(teachingAssignmentViewModel, msg);
 
                 if (teachingAssignmentViewModel.TeachingAssignment.Id != 0)
@@ -168,6 +151,7 @@ namespace DegreeProjectsSystem.Areas.Admin.Controllers
                     teachingAssignmentViewModel.TeachingAssignment = _unitWork.TeachingAssignment.Get(teachingAssignmentViewModel.TeachingAssignment.Id);
                 }
             }
+
             return View(teachingAssignmentViewModel);
         }
 
@@ -176,12 +160,12 @@ namespace DegreeProjectsSystem.Areas.Admin.Controllers
             var config = _unitWork.Config.GetFirst();
 
             teachingAssignmentViewModel.StudentRequestList = _unitWork.StudentRequest
-                .GetAll(includeProperties: "Solicitude")
+                .GetAll(includeProperties: "Solicitude").Distinct()
                 .Select(sr => new SelectListItem
                 {
                     Text = sr.Solicitude.TitleDegreeWork + " Acta No. " + sr.Solicitude.ActNumber,
                     Value = sr.Solicitude.Id.ToString()
-                }).Distinct().ToList();
+                });
 
             teachingAssignmentViewModel.PersonTypePersonList = _unitWork.PersonTypePerson
                 .GetAll(pe => pe.TypePerson.Id == config.TeacherTypeId, includeProperties: "Person")

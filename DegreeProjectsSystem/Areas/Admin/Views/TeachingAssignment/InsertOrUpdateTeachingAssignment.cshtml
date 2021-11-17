@@ -1,9 +1,19 @@
 ﻿@model DegreeProjectsSystem.Models.ViewModels.TeachingAssignmentViewModel
+
+
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     var title = "Crear Asignación Docente";
 }
 
+<!doctype html>
+<html lang="es-co">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+</head>
 <form class="form-horizontal" role="form" method="post">
     <div class="row p-3 border-0">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -57,7 +67,7 @@
             </div>
             <div class="col-sm-12">
                 <label asp-for="TeachingAssignment.AssigmentDate" class="control-label"></label>
-                <input id="datePicker" asp-for="TeachingAssignment.AssigmentDate" type="date" class="form-control" name="ActDate" />
+                <input id="datePicker" asp-for="TeachingAssignment.AssigmentDate" class="form-control" name="AssigmentDate" />
                 <span asp-validation-for="TeachingAssignment.AssigmentDate" class="text-danger"></span>
             </div>
         </div>
@@ -94,7 +104,15 @@
     </div>
 </form>
 
-
+</html>
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+    $(function () {
+        $.datepicker.setDefaults($.datepicker.regional["es"]);
+        $("#datePicker").datepicker({
+            dateFormat: 'dd/mm/yyyy',
+            firstDay: 1
+        });
+    });
 }

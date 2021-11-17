@@ -14,10 +14,13 @@ function loadDataTable() {
             "url": "/Admin/TeachingAssignment/GetAllTeachingAssignments"
         },
         "columns": [
-            { "data": "solicitude.titleDegreeWork" },
-            //{ "data": "teachingAssignment.studentRequest.solicitude.actNumber" },
-            //{ "data": "teachingAssignment.studentRequest.person.names"},
-            //{ "data": "teachingAssignment.studentRequest.person.surnames",},
+            { "data": "studentRequest.solicitude.titleDegreeWork"},
+            { "data": "studentRequest.solicitude.ActNumber" },
+            { "data": "studentRequest.person.names" },
+            { "data": "personTypePerson.person.names" },
+            { "data": "teachingFunction.name" },
+            { "data": "assigmentDate" },
+            { "data": "observations"},
             {
                 "data": "active",
                 "render": function (data) {
