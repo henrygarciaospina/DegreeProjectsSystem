@@ -33,6 +33,7 @@ namespace DegreeProjectsSystem.Models
         [ForeignKey("TeachingFunctionId")]
         public TeachingFunction TeachingFunction { get; set; }
 
+        [Display(Name = "Fecha de asignación")]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime AssigmentDate { get; set; }
 

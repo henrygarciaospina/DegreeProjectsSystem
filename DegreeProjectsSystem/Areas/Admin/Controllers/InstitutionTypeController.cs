@@ -40,7 +40,6 @@ namespace DegreeProjectsSystem.Areas.Admin.Controllers
                 return View(institutionType);
             }
             // Actualiza el registro
-            //institutionType = _unitWork
             institutionType = _unitWork.InstitutionType.Get(id.GetValueOrDefault());
             if (institutionType == null)
             {

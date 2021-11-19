@@ -5,6 +5,7 @@ using DegreeProjectsSystem.Models;
 using DegreeProjectsSystem.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 
@@ -45,7 +46,7 @@ namespace DegreeProjectsSystem.Areas.Admin.Controllers
                 TeachingAssignment = new TeachingAssignment(),
 
                 StudentRequestList = _unitWork.StudentRequest
-                .GetAll(includeProperties: "Solicitude").Distinct()
+                .GetAll(includeProperties: "Solicitude")
                 .Select(sr => new SelectListItem
                 {
                     Text = sr.Solicitude.TitleDegreeWork + " Acta No. " + sr.Solicitude.ActNumber,
@@ -120,26 +121,25 @@ namespace DegreeProjectsSystem.Areas.Admin.Controllers
                     return RedirectToAction(nameof(Index));
 
                 }
-               // catch (DbUpdateException dbUpdateException)
-               catch (Exception ex)
-                {
-                    throw ex;
+                catch (DbUpdateException dbUpdateException)
 
-                    //if (dbUpdateException.InnerException.Message.Contains("IX_TeachingAssigments_PersonTypePersonId"))
-                    
-                    //{
-                    //    var msg = "El docente ingresado ya se encuentra asignado a esta solicitud";
-                    //    LoadLists(teachingAssignmentViewModel, msg);
-                    //}
-                    //else
-                    //{
-                    //    ModelState.AddModelError(string.Empty, dbUpdateException.InnerException.Message);
-                    //}
+                {
+
+
+                    if (dbUpdateException.InnerException.Message.Contains("IX_TeachingAssigments_StudentRequestId_PersonTypePersonId"))
+                    {
+                        var msg = "El docente ingresado ya se encuentra asignado a esta solicitud";
+                        LoadLists(teachingAssignmentViewModel, msg);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, dbUpdateException.InnerException.Message);
+                    }
                 }
-                //catch (Exception exception)
-                //{
-                //    ModelState.AddModelError(string.Empty, exception.Message);
-                //}
+                catch (Exception exception)
+                {
+                    ModelState.AddModelError(string.Empty, exception.Message);
+                }
             }
             else
             {

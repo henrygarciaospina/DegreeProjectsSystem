@@ -107,12 +107,12 @@
 </html>
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-
+<script>
     $(function () {
-        $.datepicker.setDefaults($.datepicker.regional["es"]);
         $("#datePicker").datepicker({
-            dateFormat: 'dd/mm/yyyy',
+            dateFormat: 'dd/mm/aaaa',
             firstDay: 1
         });
     });
+    </script>
 }
