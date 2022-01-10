@@ -47,13 +47,10 @@
                 <label asp-for="TeachingAssignment.PersonTypePerson.Person.Names"></label>
             </div>
             <div class="col-8 mb-3">
-                @Html.DropDownListFor(ta => ta.TeachingAssignment.PersonTypePerson.PersonId, Model.PersonTypePersonList,
+                @Html.DropDownListFor(ta => ta.TeachingAssignment.PersonTypePersonId, Model.PersonTypePersonList,
                        "Seleccione un docente....",
                        new { @class = "form-control" })
-                <span asp-validation-for="TeachingAssignment.PersonTypePerson.PersonId" class="text-danger"></span>
-            </div>
-            <div>
-                <span asp-validation-for="TeachingAssignment.PersonTypePerson.Person.IdentificationNumber" class="text-danger"></span>
+                <span asp-validation-for="TeachingAssignment.PersonTypePersonId" class="text-danger"></span>
             </div>
         </div>
         <div class="row">

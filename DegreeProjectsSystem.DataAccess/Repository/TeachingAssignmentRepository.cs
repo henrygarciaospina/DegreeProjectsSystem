@@ -23,8 +23,8 @@ namespace DegreeProjectsSystem.DataAccess.Repository
                 if (teachingAssignmentDb != null)
                 {
                     teachingAssignmentDb.SolicitudeId = teachingAssignment.SolicitudeId;
-                    teachingAssignmentDb.PersonTypePerson.TypePersonId = teachingAssignment.PersonTypePerson.TypePersonId;
-                    teachingAssignmentDb.TeachingFunction.Id = teachingAssignment.TeachingFunction.Id;
+                    teachingAssignmentDb.PersonTypePersonId = teachingAssignment.PersonTypePersonId;
+                    teachingAssignmentDb.TeachingFunctionId = teachingAssignment.TeachingFunctionId;
                     teachingAssignmentDb.AssigmentDate = teachingAssignment.AssigmentDate;
                     teachingAssignmentDb.Observations = teachingAssignment.Observations;
                     teachingAssignmentDb.Active = teachingAssignment.Active;
