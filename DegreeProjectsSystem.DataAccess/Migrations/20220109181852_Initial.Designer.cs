@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DegreeProjectsSystem.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211115230328_AddTableConfigToDatabaseAndUpdateModelTeachingAssignment")]
-    partial class AddTableConfigToDatabaseAndUpdateModelTeachingAssignment
+    [Migration("20220109181852_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -740,7 +740,7 @@ namespace DegreeProjectsSystem.DataAccess.Migrations
                     b.Property<int>("PersonTypePersonId")
                         .HasColumnType("int");
 
-                    b.Property<int>("StudentRequestId")
+                    b.Property<int>("SolicitudeId")
                         .HasColumnType("int");
 
                     b.Property<int>("TeachingFunctionId")
@@ -748,12 +748,12 @@ namespace DegreeProjectsSystem.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PersonTypePersonId")
-                        .IsUnique();
-
-                    b.HasIndex("StudentRequestId");
+                    b.HasIndex("PersonTypePersonId");
 
                     b.HasIndex("TeachingFunctionId");
+
+                    b.HasIndex("SolicitudeId", "PersonTypePersonId")
+                        .IsUnique();
 
                     b.ToTable("TeachingAssigments");
                 });
@@ -1213,9 +1213,9 @@ namespace DegreeProjectsSystem.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DegreeProjectsSystem.Models.StudentRequest", "StudentRequest")
+                    b.HasOne("DegreeProjectsSystem.Models.Solicitude", "Solicitude")
                         .WithMany()
-                        .HasForeignKey("StudentRequestId")
+                        .HasForeignKey("SolicitudeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

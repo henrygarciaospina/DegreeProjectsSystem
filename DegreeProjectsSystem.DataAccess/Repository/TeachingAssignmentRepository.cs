@@ -2,6 +2,7 @@
 using DegreeProjectsSystem.DataAccess.Data;
 using DegreeProjectsSystem.Models;
 using System.Linq;
+using System;
 
 namespace DegreeProjectsSystem.DataAccess.Repository
 {
@@ -21,7 +22,7 @@ namespace DegreeProjectsSystem.DataAccess.Repository
             {
                 if (teachingAssignmentDb != null)
                 {
-                    teachingAssignmentDb.StudentRequest.SolicitudeId = teachingAssignment.StudentRequest.SolicitudeId;
+                    teachingAssignmentDb.SolicitudeId = teachingAssignment.SolicitudeId;
                     teachingAssignmentDb.PersonTypePerson.TypePersonId = teachingAssignment.PersonTypePerson.TypePersonId;
                     teachingAssignmentDb.TeachingFunction.Id = teachingAssignment.TeachingFunction.Id;
                     teachingAssignmentDb.AssigmentDate = teachingAssignment.AssigmentDate;
@@ -29,10 +30,10 @@ namespace DegreeProjectsSystem.DataAccess.Repository
                     teachingAssignmentDb.Active = teachingAssignment.Active;
                 }
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
 
-                throw(ex);
+                throw(ex.InnerException);
             }
             
         }

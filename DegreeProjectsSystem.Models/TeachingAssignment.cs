@@ -10,12 +10,12 @@ namespace DegreeProjectsSystem.Models
         public int Id { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Debe seleccionar una Solicitud")]
-        public int StudentRequestId { get; set; }
+        public int SolicitudeId { get; set; }
 
         [Display(Name = "Solicitud")]
         //Foreign key
-        [ForeignKey("StudentRequestId")]
-        public StudentRequest StudentRequest { get; set; }
+        [ForeignKey("SolicitudeId")]
+        public Solicitude Solicitude { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Debe seleccionar un Docente")]
         public int PersonTypePersonId { get; set; }

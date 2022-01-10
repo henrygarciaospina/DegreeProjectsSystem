@@ -132,7 +132,7 @@ namespace DegreeProjectsSystem.DataAccess.Data
                .IsUnique();
 
             modelBuilder.Entity<TeachingAssignment>()
-               .HasIndex(ta => new { ta.StudentRequestId, ta.PersonTypePersonId})
+               .HasIndex(ta => new { ta.SolicitudeId, ta.PersonTypePersonId})
                .IsUnique();
 
             modelBuilder.Entity<TeachingFunction>()

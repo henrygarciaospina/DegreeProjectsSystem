@@ -33,13 +33,13 @@
 
         <div class="row mt-2">
             <div class="col-4 mb-3">
-                <label asp-for="TeachingAssignment.StudentRequest.Solicitude.TitleDegreeWork"></label>
+                <label asp-for="TeachingAssignment.Solicitude.TitleDegreeWork"></label>
             </div>
             <div class="col-8 mb-3">
-                @Html.DropDownListFor(ta => ta.TeachingAssignment.StudentRequest.SolicitudeId, Model.StudentRequestList,
+                @Html.DropDownListFor(ta => ta.TeachingAssignment.SolicitudeId, Model.SolicitudeList,
                 "Seleccione una solicitud....",
                 new { @class = "form-control" })
-                <span asp-validation-for="TeachingAssignment.StudentRequest.SolicitudeId" class="text-danger"></span>
+                <span asp-validation-for="TeachingAssignment.SolicitudeId" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group row">
@@ -51,6 +51,9 @@
                        "Seleccione un docente....",
                        new { @class = "form-control" })
                 <span asp-validation-for="TeachingAssignment.PersonTypePerson.PersonId" class="text-danger"></span>
+            </div>
+            <div>
+                <span asp-validation-for="TeachingAssignment.PersonTypePerson.Person.IdentificationNumber" class="text-danger"></span>
             </div>
         </div>
         <div class="row">

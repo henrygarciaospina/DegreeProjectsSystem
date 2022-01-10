@@ -1,7 +1,7 @@
 ﻿@model DegreeProjectsSystem.Models.ViewModels.StudentRequestViewModel 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var title = "Asignar Solictud a Estudiante";
+    var title = "Asignar Solicitud a Estudiante";
 }
 
 <form method="post">
@@ -27,7 +27,7 @@
         </div>
         <div class="col-8 mb-3">
             @Html.DropDownListFor(sst => sst.StudentRequest.SolicitudeId, Model.SolicitudeList,
-            "Seleccione una solictud....",
+            "Seleccione una solicitud....",
             new { @class = "form-control" })
             <span asp-validation-for="StudentRequest.SolicitudeId" class="text-danger"></span>
         </div>

@@ -22,7 +22,6 @@ namespace DegreeProjectsSystem.DataAccess.Repository
                 solicitudeDb.TitleDegreeWork = solicitude.TitleDegreeWork;
                 solicitudeDb.ActNumber = solicitude.ActNumber;
                 solicitudeDb.ActDate = solicitude.ActDate;
-                solicitudeDb.ModalityChange = solicitude.ModalityChange;
                 solicitudeDb.Observations = solicitude.Observations;
                 solicitudeDb.Active = solicitude.Active;
             }

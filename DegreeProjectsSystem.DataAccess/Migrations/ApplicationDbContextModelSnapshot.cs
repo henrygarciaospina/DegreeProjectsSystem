@@ -649,9 +649,6 @@ namespace DegreeProjectsSystem.DataAccess.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("ModalityChange")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Observations")
                         .HasColumnType("nvarchar(200)")
                         .HasMaxLength(200);
@@ -738,7 +735,7 @@ namespace DegreeProjectsSystem.DataAccess.Migrations
                     b.Property<int>("PersonTypePersonId")
                         .HasColumnType("int");
 
-                    b.Property<int>("StudentRequestId")
+                    b.Property<int>("SolicitudeId")
                         .HasColumnType("int");
 
                     b.Property<int>("TeachingFunctionId")
@@ -750,7 +747,7 @@ namespace DegreeProjectsSystem.DataAccess.Migrations
 
                     b.HasIndex("TeachingFunctionId");
 
-                    b.HasIndex("StudentRequestId", "PersonTypePersonId")
+                    b.HasIndex("SolicitudeId", "PersonTypePersonId")
                         .IsUnique();
 
                     b.ToTable("TeachingAssigments");
@@ -1211,9 +1208,9 @@ namespace DegreeProjectsSystem.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DegreeProjectsSystem.Models.StudentRequest", "StudentRequest")
+                    b.HasOne("DegreeProjectsSystem.Models.Solicitude", "Solicitude")
                         .WithMany()
-                        .HasForeignKey("StudentRequestId")
+                        .HasForeignKey("SolicitudeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

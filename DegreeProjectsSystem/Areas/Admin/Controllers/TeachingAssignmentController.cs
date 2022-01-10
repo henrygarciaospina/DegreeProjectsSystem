@@ -45,20 +45,18 @@ namespace DegreeProjectsSystem.Areas.Admin.Controllers
 
                 TeachingAssignment = new TeachingAssignment(),
 
-                StudentRequestList = _unitWork.StudentRequest
-                .GetAll(includeProperties: "Solicitude")
-                .Select(sr => new SelectListItem
+                SolicitudeList = _unitWork.Solicitude.GetAll(sl => sl.Active == true, orderBy: sl => sl.OrderBy(sl => sl.TitleDegreeWork)).Select(sl => new SelectListItem
                 {
-                    Text = sr.Solicitude.TitleDegreeWork + " Acta No. " + sr.Solicitude.ActNumber,
-                    Value = sr.Solicitude.Id.ToString()
-                }),
+                    Text = sl.TitleDegreeWork + " - " + "Acta No. " + sl.ActNumber,
+                    Value = sl.Id.ToString()
+                }).ToList(),
 
                 PersonTypePersonList = _unitWork.PersonTypePerson
                 .GetAll(pe => pe.TypePerson.Id == config.TeacherTypeId, includeProperties: "Person")
                 .Select(pe => new SelectListItem
                 {
                     Text = pe.Person.Names + " " + pe.Person.Surnames,
-                    Value = pe.Person.Id.ToString()
+                    Value = pe.Id.ToString()
                 }),
 
                 TeachingFunctionList = _unitWork.TeachingFunction
@@ -92,6 +90,7 @@ namespace DegreeProjectsSystem.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult InsertOrUpdateTeachingAssignment(TeachingAssignmentViewModel teachingAssignmentViewModel)
         {
+            teachingAssignmentViewModel.TeachingAssignment.SolicitudeId = Convert.ToInt32(Request.Form["SolicitudeId"]);
 
             if (ModelState.IsValid)
             {
@@ -99,12 +98,32 @@ namespace DegreeProjectsSystem.Areas.Admin.Controllers
                 if (teachingAssignmentViewModel.TeachingAssignment.Id == 0)
                 {
                     action = Action.Create;
-                    _unitWork.TeachingAssignment.Add(teachingAssignmentViewModel.TeachingAssignment);
+
+                    try
+                    {
+                        _unitWork.TeachingAssignment.Add(teachingAssignmentViewModel.TeachingAssignment);
+                    }
+                    catch (Exception es)
+                    {
+                        msg = "El docente y solicitud ingresado ya se encuentran registrados";
+                        LoadLists(teachingAssignmentViewModel, msg + es.Message);
+                    }
+                   
                 }
                 else
                 {
                     action = Action.Update;
-                    _unitWork.TeachingAssignment.Update(teachingAssignmentViewModel.TeachingAssignment);
+                    try
+                    {
+                        _unitWork.TeachingAssignment.Update(teachingAssignmentViewModel.TeachingAssignment);
+                    }
+                    catch (Exception)
+                    {
+
+                        msg = "El docente y solicitud ingresado ya se encuentran registrados";
+                        LoadLists(teachingAssignmentViewModel, msg);
+                    }
+                   
                 }
                 try
                 {
@@ -122,23 +141,22 @@ namespace DegreeProjectsSystem.Areas.Admin.Controllers
 
                 }
                 catch (DbUpdateException dbUpdateException)
-
                 {
-
-
-                    if (dbUpdateException.InnerException.Message.Contains("IX_TeachingAssigments_StudentRequestId_PersonTypePersonId"))
+                    if (dbUpdateException.InnerException.Message.Contains("IX_TeachingAssigments_SolicitudetId_PersonTypePersonId"))
                     {
                         var msg = "El docente ingresado ya se encuentra asignado a esta solicitud";
                         LoadLists(teachingAssignmentViewModel, msg);
                     }
                     else
                     {
-                        ModelState.AddModelError(string.Empty, dbUpdateException.InnerException.Message);
+                        var msg = "El docente ingresado ya se encuentra asignado a esta solicitud";
+                        LoadLists(teachingAssignmentViewModel, msg);
                     }
                 }
                 catch (Exception exception)
                 {
-                    ModelState.AddModelError(string.Empty, exception.Message);
+                    var msg = $"Se produjo un error de base de datos { exception}";
+                    LoadLists(teachingAssignmentViewModel, msg);
                 }
             }
             else
@@ -159,12 +177,12 @@ namespace DegreeProjectsSystem.Areas.Admin.Controllers
         {
             var config = _unitWork.Config.GetFirst();
 
-            teachingAssignmentViewModel.StudentRequestList = _unitWork.StudentRequest
-                .GetAll(includeProperties: "Solicitude").Distinct()
+            teachingAssignmentViewModel.SolicitudeList = _unitWork.Solicitude
+                .GetAll()
                 .Select(sr => new SelectListItem
                 {
-                    Text = sr.Solicitude.TitleDegreeWork + " Acta No. " + sr.Solicitude.ActNumber,
-                    Value = sr.Solicitude.Id.ToString()
+                    Text = sr.TitleDegreeWork + " Acta No. " + sr.ActNumber,
+                    Value = sr.Id.ToString()
                 });
 
             teachingAssignmentViewModel.PersonTypePersonList = _unitWork.PersonTypePerson
@@ -172,7 +190,7 @@ namespace DegreeProjectsSystem.Areas.Admin.Controllers
                 .Select(pe => new SelectListItem
                 {
                     Text = pe.Person.Names + " " + pe.Person.Surnames,
-                    Value = pe.Person.Id.ToString()
+                    Value = pe.Id.ToString()
                 });
 
 
@@ -198,7 +216,7 @@ namespace DegreeProjectsSystem.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAllTeachingAssignments()
         {
-            var teachingAssignments = _unitWork.TeachingAssignment.GetAll(includeProperties: "StudentRequest,PersonTypePerson,TeachingFunction");
+            var teachingAssignments = _unitWork.TeachingAssignment.GetAll(includeProperties: "Solicitude,PersonTypePerson,TeachingFunction");
             return Json(new { data = teachingAssignments });
         }
 

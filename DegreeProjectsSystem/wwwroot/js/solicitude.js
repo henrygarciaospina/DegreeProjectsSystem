@@ -28,22 +28,6 @@ function loadDataTable() {
                 }
             },
             {
-                "data": "modalityChange",
-                "render": function (data) {
-                    isChange = data;
-                    if (isChange) {
-                        return `
-                                <div class="status-inactive text-center">Si</div>
-                            `;
-                    }
-                    else {
-                        return `      
-                                <div class="status-active text-center">No</div>
-                            `;
-                    }
-                }, "width": "10%"   
-            },
-            {
                 "data": "active",
                 "render": function (data) {
                 active = data;

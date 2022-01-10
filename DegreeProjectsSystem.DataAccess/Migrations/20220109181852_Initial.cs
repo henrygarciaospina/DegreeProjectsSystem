@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DegreeProjectsSystem.DataAccess.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -48,6 +48,22 @@ namespace DegreeProjectsSystem.DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Configs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StudenTypeId = table.Column<int>(nullable: false),
+                    TeacherTypeId = table.Column<int>(nullable: false),
+                    ContactTypeId = table.Column<int>(nullable: false),
+                    AdministrativeTypeId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Configs", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -476,13 +492,13 @@ namespace DegreeProjectsSystem.DataAccess.Migrations
                         column: x => x.DepartmentId,
                         principalTable: "Departments",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_People_Genders_GenderId",
                         column: x => x.GenderId,
                         principalTable: "Genders",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_People_IdentityDocumentTypes_IdentityDocumentTypeId",
                         column: x => x.IdentityDocumentTypeId,
@@ -624,6 +640,34 @@ namespace DegreeProjectsSystem.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "StudentRequests",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SolicitudeId = table.Column<int>(nullable: false),
+                    PersonId = table.Column<int>(nullable: false),
+                    Observations = table.Column<string>(nullable: true),
+                    Active = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StudentRequests", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_StudentRequests_People_PersonId",
+                        column: x => x.PersonId,
+                        principalTable: "People",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_StudentRequests_Solicitudes_SolicitudeId",
+                        column: x => x.SolicitudeId,
+                        principalTable: "Solicitudes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CareerPeople",
                 columns: table => new
                 {
@@ -648,6 +692,42 @@ namespace DegreeProjectsSystem.DataAccess.Migrations
                         principalTable: "People",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TeachingAssigments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SolicitudeId = table.Column<int>(nullable: false),
+                    PersonTypePersonId = table.Column<int>(nullable: false),
+                    TeachingFunctionId = table.Column<int>(nullable: false),
+                    AssigmentDate = table.Column<DateTime>(nullable: false),
+                    Observations = table.Column<string>(maxLength: 200, nullable: true),
+                    Active = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TeachingAssigments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TeachingAssigments_PersonTypePeople_PersonTypePersonId",
+                        column: x => x.PersonTypePersonId,
+                        principalTable: "PersonTypePeople",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_TeachingAssigments_Solicitudes_SolicitudeId",
+                        column: x => x.SolicitudeId,
+                        principalTable: "Solicitudes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_TeachingAssigments_TeachingFunctions_TeachingFunctionId",
+                        column: x => x.TeachingFunctionId,
+                        principalTable: "TeachingFunctions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateIndex(
@@ -895,15 +975,36 @@ namespace DegreeProjectsSystem.DataAccess.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Solicitudes_ActNumber",
-                table: "Solicitudes",
-                column: "ActNumber",
+                name: "IX_StudentRequests_SolicitudeId",
+                table: "StudentRequests",
+                column: "SolicitudeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StudentRequests_PersonId_SolicitudeId",
+                table: "StudentRequests",
+                columns: new[] { "PersonId", "SolicitudeId" },
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Submodalities_Name",
                 table: "Submodalities",
                 column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TeachingAssigments_PersonTypePersonId",
+                table: "TeachingAssigments",
+                column: "PersonTypePersonId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TeachingAssigments_TeachingFunctionId",
+                table: "TeachingAssigments",
+                column: "TeachingFunctionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TeachingAssigments_SolicitudeId_PersonTypePersonId",
+                table: "TeachingAssigments",
+                columns: new[] { "SolicitudeId", "PersonTypePersonId" },
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -940,6 +1041,9 @@ namespace DegreeProjectsSystem.DataAccess.Migrations
                 name: "CareerPeople");
 
             migrationBuilder.DropTable(
+                name: "Configs");
+
+            migrationBuilder.DropTable(
                 name: "DepartmentFaculties");
 
             migrationBuilder.DropTable(
@@ -952,16 +1056,13 @@ namespace DegreeProjectsSystem.DataAccess.Migrations
                 name: "ModalitySubmodalities");
 
             migrationBuilder.DropTable(
-                name: "PersonTypePeople");
-
-            migrationBuilder.DropTable(
                 name: "Recognitions");
 
             migrationBuilder.DropTable(
-                name: "Solicitudes");
+                name: "StudentRequests");
 
             migrationBuilder.DropTable(
-                name: "TeachingFunctions");
+                name: "TeachingAssigments");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -988,16 +1089,28 @@ namespace DegreeProjectsSystem.DataAccess.Migrations
                 name: "Submodalities");
 
             migrationBuilder.DropTable(
-                name: "People");
+                name: "PersonTypePeople");
 
             migrationBuilder.DropTable(
-                name: "TypePeople");
+                name: "Solicitudes");
+
+            migrationBuilder.DropTable(
+                name: "TeachingFunctions");
 
             migrationBuilder.DropTable(
                 name: "ProgramTypes");
 
             migrationBuilder.DropTable(
                 name: "InstitutionTypes");
+
+            migrationBuilder.DropTable(
+                name: "People");
+
+            migrationBuilder.DropTable(
+                name: "TypePeople");
+
+            migrationBuilder.DropTable(
+                name: "EducationLevels");
 
             migrationBuilder.DropTable(
                 name: "Cities");
@@ -1007,9 +1120,6 @@ namespace DegreeProjectsSystem.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "IdentityDocumentTypes");
-
-            migrationBuilder.DropTable(
-                name: "EducationLevels");
 
             migrationBuilder.DropTable(
                 name: "Departments");

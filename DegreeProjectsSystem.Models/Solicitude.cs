@@ -24,10 +24,6 @@ namespace DegreeProjectsSystem.Models
         [Display(Name = "Fecha Acta")]
         public DateTime ActDate { get; set; }
         
-        [Required]
-        [Display(Name = "Cambio Modalidad")]
-        public bool ModalityChange { get; set; }
-
         [MaxLength(200, ErrorMessage = "El campo {0} debe tener menos de {1} caracteres")]
         [DataType(DataType.MultilineText)]
         [Display(Name = "Observaciones")]

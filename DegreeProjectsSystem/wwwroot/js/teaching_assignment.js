@@ -14,13 +14,12 @@ function loadDataTable() {
             "url": "/Admin/TeachingAssignment/GetAllTeachingAssignments"
         },
         "columns": [
-            { "data": "studentRequest.solicitude.titleDegreeWork"},
-            { "data": "studentRequest.solicitude.ActNumber" },
-            { "data": "studentRequest.person.names" },
-            { "data": "personTypePerson.person.names" },
-            { "data": "teachingFunction.name" },
-            { "data": "assigmentDate" },
-            { "data": "observations"},
+            { "data": "solicitude.titleDegreeWork", "width": "20%"},
+            { "data": "solicitude.actNumber", "width": "10%"},
+            { "data": "personTypePerson.person.names", "width": "15%" },
+            { "data": "teachingFunction.name", "width": "10%"},
+            { "data": "assigmentDate", "width": "10%"},
+            { "data": "observations", "width": "15%"},
             {
                 "data": "active",
                 "render": function (data) {
@@ -35,7 +34,7 @@ function loadDataTable() {
                                 <div class="status-inactive text-center">Inactivo</div>
                             `
                     }
-                },
+                }, "width": "15%"
             },
             {
                 "data": "id",
@@ -43,13 +42,13 @@ function loadDataTable() {
                     if (!active) {
                         return `
                             <div class="text-center">
-                                <a href="/Admin/TeachingAssignment/InsertOrUpdateTeachingAssignment/${data}" class="btn btn-warning text-white" style="cursor:pointer;">
+                                <a href="/Admin/TeachingAssignment/InsertOrUpdateTeachingAssignment/${data}" class="btn btn-block btn-warning text-white" style="cursor:pointer;">
                                     <i class="far fa-edit"></i>
                                 </a>
-                                <a onclick=Delete("/Admin/TeachingAssignment/DeleteTeachingAssignment/${data}") class="btn btn-danger disabled text-white" disabled style="cursor:pointer;">
+                                <a onclick=Delete("/Admin/TeachingAssignment/DeleteTeachingAssignment/${data}") class="btn btn-block btn-danger disabled text-white" disabled style="cursor:pointer;">
                                     <i class="far fa-trash-alt"></i>
                                 </a>
-                                <a href="/Admin/TeachingAssignment/DetailTeachingAssignment/${data}" class="btn btn-primary text-white" style="cursor:pointer">
+                                <a href="/Admin/TeachingAssignment/DetailTeachingAssignment/${data}" class="btn btn-block btn-primary text-white" style="cursor:pointer">
                                      <i class="far fa-eye"></i>
                                 </a>
                             </div>
@@ -58,20 +57,20 @@ function loadDataTable() {
                     else {
                         return `
                         <div class="text-center">
-                            <a href="/Admin/TeachingAssignment/InsertOrUpdateTeachingAssignment/${data}" class="btn btn-warning text-white" style="cursor:pointer;">
+                            <a href="/Admin/TeachingAssignment/InsertOrUpdateTeachingAssignment/${data}" class="btn btn-block btn-warning text-white" style="cursor:pointer;">
                                 <i class="far fa-edit"></i>
                             </a>
-                            <a onclick=Delete("/Admin/TeachingAssignment/DeleteTeachingAssignment/${data}") class="btn btn-danger text-white" style="cursor:pointer;">
+                            <a onclick=Delete("/Admin/TeachingAssignment/DeleteTeachingAssignment/${data}") class="btn btn-block btn-danger text-white" style="cursor:pointer;">
                                     <i class="far fa-trash-alt"></i>
                             </a>
-                            <a href="/Admin/TeachingAssignment/DetailTeachingAssignment/${data}" class="btn btn-primary text-white" style="cursor:pointer">
+                            <a href="/Admin/TeachingAssignment/DetailTeachingAssignment/${data}" class="btn btn-block btn-primary text-white" style="cursor:pointer">
                                 <i class="far fa-eye"></i>
                             </a>
                             </div >
                          </div >
                          `;
                     }
-                },
+                }, "width": "15%"
             }
         ]
     });

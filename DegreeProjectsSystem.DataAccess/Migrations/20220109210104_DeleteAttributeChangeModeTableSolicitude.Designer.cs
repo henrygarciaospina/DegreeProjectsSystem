@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DegreeProjectsSystem.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211111045148_AddForeignKeySolicitudeIdToTableTeachingAssigment")]
-    partial class AddForeignKeySolicitudeIdToTableTeachingAssigment
+    [Migration("20220109210104_DeleteAttributeChangeModeTableSolicitude")]
+    partial class DeleteAttributeChangeModeTableSolicitude
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -104,6 +104,30 @@ namespace DegreeProjectsSystem.DataAccess.Migrations
                         .IsUnique();
 
                     b.ToTable("Cities");
+                });
+
+            modelBuilder.Entity("DegreeProjectsSystem.Models.Config", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AdministrativeTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ContactTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StudenTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeacherTypeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Configs");
                 });
 
             modelBuilder.Entity("DegreeProjectsSystem.Models.Department", b =>
@@ -627,9 +651,6 @@ namespace DegreeProjectsSystem.DataAccess.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("ModalityChange")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Observations")
                         .HasColumnType("nvarchar(200)")
                         .HasMaxLength(200);
@@ -696,7 +717,7 @@ namespace DegreeProjectsSystem.DataAccess.Migrations
                     b.ToTable("Submodalities");
                 });
 
-            modelBuilder.Entity("DegreeProjectsSystem.Models.TeachingAssigment", b =>
+            modelBuilder.Entity("DegreeProjectsSystem.Models.TeachingAssignment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -707,13 +728,13 @@ namespace DegreeProjectsSystem.DataAccess.Migrations
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("AssigmentDate")
-                        .HasColumnType("datetime2")
-                        .HasMaxLength(200);
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Observations")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
 
-                    b.Property<int>("PersonId")
+                    b.Property<int>("PersonTypePersonId")
                         .HasColumnType("int");
 
                     b.Property<int>("SolicitudeId")
@@ -724,12 +745,12 @@ namespace DegreeProjectsSystem.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PersonId")
-                        .IsUnique();
-
-                    b.HasIndex("SolicitudeId");
+                    b.HasIndex("PersonTypePersonId");
 
                     b.HasIndex("TeachingFunctionId");
+
+                    b.HasIndex("SolicitudeId", "PersonTypePersonId")
+                        .IsUnique();
 
                     b.ToTable("TeachingAssigments");
                 });
@@ -1181,11 +1202,11 @@ namespace DegreeProjectsSystem.DataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("DegreeProjectsSystem.Models.TeachingAssigment", b =>
+            modelBuilder.Entity("DegreeProjectsSystem.Models.TeachingAssignment", b =>
                 {
-                    b.HasOne("DegreeProjectsSystem.Models.Person", "Person")
+                    b.HasOne("DegreeProjectsSystem.Models.PersonTypePerson", "PersonTypePerson")
                         .WithMany()
-                        .HasForeignKey("PersonId")
+                        .HasForeignKey("PersonTypePersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

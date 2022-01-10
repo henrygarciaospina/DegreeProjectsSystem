@@ -40,7 +40,6 @@ namespace DegreeProjectsSystem.Areas.Admin.Controllers
             if (id == null)
             {
                 solicitude.ActDate = DateTime.Now;
-                solicitude.ModalityChange = false;
                 solicitude.Active = true;
                 // Crea un nuevo registro
                 return View(solicitude);
