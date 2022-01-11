@@ -90,8 +90,6 @@ namespace DegreeProjectsSystem.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult InsertOrUpdateTeachingAssignment(TeachingAssignmentViewModel teachingAssignmentViewModel)
         {
-            teachingAssignmentViewModel.TeachingAssignment.SolicitudeId = Convert.ToInt32(Request.Form["SolicitudeId"]);
-
             if (ModelState.IsValid)
             {
                 Action action = Action.None;

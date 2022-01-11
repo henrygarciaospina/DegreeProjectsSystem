@@ -16,7 +16,7 @@ function loadDataTable() {
         "columns": [
             { "data": "solicitude.titleDegreeWork", "width": "20%"},
             { "data": "solicitude.actNumber", "width": "10%"},
-            { "data": "personTypePerson.person.names", "width": "15%" },
+            { "data": "solicitude.titleDegreeWork", "width": "20%" },
             { "data": "teachingFunction.name", "width": "10%"},
             { "data": "assigmentDate", "width": "10%"},
             { "data": "observations", "width": "15%"},
