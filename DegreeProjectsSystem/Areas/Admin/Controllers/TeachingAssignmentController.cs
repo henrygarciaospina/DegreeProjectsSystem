@@ -214,7 +214,7 @@ namespace DegreeProjectsSystem.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAllTeachingAssignments()
         {
-            var teachingAssignments = _unitWork.TeachingAssignment.GetAll(includeProperties: "Solicitude,PersonTypePerson,TeachingFunction");
+            var teachingAssignments = _unitWork.TeachingAssignment.GetAll(includeProperties: "Solicitude,PersonTypePerson.Person,TeachingFunction");
             return Json(new { data = teachingAssignments });
         }
 
