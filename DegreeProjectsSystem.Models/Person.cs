@@ -31,6 +31,10 @@ namespace DegreeProjectsSystem.Models
         [Display(Name = "Apellido(s)")]
         public string Surnames { get; set; }
 
+        [NotMapped]
+        public string FullName => $"{Names} {Surnames}";
+
+
         [Required(AllowEmptyStrings = false, ErrorMessage = "Debe seleccionar el Género")]
         public int GenderId { get; set; }
 
