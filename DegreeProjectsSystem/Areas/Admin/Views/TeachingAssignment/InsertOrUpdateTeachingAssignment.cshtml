@@ -6,104 +6,108 @@
     var title = "Crear Asignación Docente";
 }
 
-<!doctype html>
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 </head>
-<form class="form-horizontal" role="form" method="post">
-    <div class="row p-3 border-0">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    </div>
-    @if(Model.TeachingAssignment.Id != 0)
-    {
-        // Actualizar
-        title = "Actualizar Asignación Docente";
-        <input type="hidden" asp-for="TeachingAssignment.Id" />
-    }
+<body>
+    <form class="form-horizontal" role="form" method="post">
+        <div class="row p-3 border-0">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        </div>
+        @if (Model.TeachingAssignment.Id != 0)
+        {
+            // Actualizar
+            title = "Actualizar Asignación Docente";
+            <input type="hidden" asp-for="TeachingAssignment.Id" />
+        }
 
 
-    <div class="container">
-        <div class="col-12 border-bottom mt-5">
-            <h2 class="text-primary">@title</h2>
-        </div>
+        <div class="container">
+            <div class="col-12 border-bottom mt-5">
+                <h2 class="text-primary">@title</h2>
+            </div>
 
-        <div class="row mt-2">
-            <div class="col-4 mb-3">
-                <label asp-for="TeachingAssignment.Solicitude.TitleDegreeWork"></label>
-            </div>
-            <div class="col-8 mb-3">
-                @Html.DropDownListFor(ta => ta.TeachingAssignment.SolicitudeId, Model.SolicitudeList,
-                "Seleccione una solicitud....",
-                new { @class = "form-control" })
-                <span asp-validation-for="TeachingAssignment.SolicitudeId" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-4 mb-3">
-                <label asp-for="TeachingAssignment.PersonTypePerson.Person.Names"></label>
-            </div>
-            <div class="col-8 mb-3">
-                @Html.DropDownListFor(ta => ta.TeachingAssignment.PersonTypePersonId, Model.PersonTypePersonList,
-                       "Seleccione un docente....",
-                       new { @class = "form-control" })
-                <span asp-validation-for="TeachingAssignment.PersonTypePersonId" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group row">
+            <div class="row mt-2">
                 <div class="col-4 mb-3">
-                    <label asp-for="TeachingAssignment.TeachingFunction.Name"></label>
+                    <label asp-for="TeachingAssignment.Solicitude.TitleDegreeWork"></label>
                 </div>
                 <div class="col-8 mb-3">
-                    @Html.DropDownListFor(tf => tf.TeachingAssignment.TeachingFunctionId, Model.TeachingFunctionList,
-                           "Seleccione una función docente....",
+                    @Html.DropDownListFor(ta => ta.TeachingAssignment.SolicitudeId, Model.SolicitudeList,
+                    "Seleccione una solicitud....",
+                    new { @class = "form-control" })
+                    <span asp-validation-for="TeachingAssignment.SolicitudeId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 mb-3">
+                    <label asp-for="TeachingAssignment.PersonTypePerson.Person.Names"></label>
+                </div>
+                <div class="col-8 mb-3">
+                    @Html.DropDownListFor(ta => ta.TeachingAssignment.PersonTypePersonId, Model.PersonTypePersonList,
+                           "Seleccione un docente....",
                            new { @class = "form-control" })
-                    <span asp-validation-for="TeachingAssignment.TeachingFunctionId" class="text-danger"></span>
+                    <span asp-validation-for="TeachingAssignment.PersonTypePersonId" class="text-danger"></span>
                 </div>
             </div>
-            <div class="col-sm-6 input-append">
-                <label asp-for="TeachingAssignment.AssigmentDate" class="control-label"></label>
-                <input type="date" id="datePicker" value="TeachingAssignment.AssigmentDate" asp-for="TeachingAssignment.AssigmentDate" class="form-control date" name="AssigmentDate"/>
-                <span asp-validation-for="TeachingAssignment.AssigmentDate" class="text-danger"></span>
+            <div class="row">
+                <div class="form-group row">
+                    <div class="col-4 mb-3">
+                        <label asp-for="TeachingAssignment.TeachingFunction.Name"></label>
+                    </div>
+                    <div class="col-8 mb-3">
+                        @Html.DropDownListFor(tf => tf.TeachingAssignment.TeachingFunctionId, Model.TeachingFunctionList,
+                               "Seleccione una función docente....",
+                               new { @class = "form-control" })
+                        <span asp-validation-for="TeachingAssignment.TeachingFunctionId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-6 input-append">
+                    <label asp-for="TeachingAssignment.AssigmentDate" class="control-label"></label>
+                    @Html.TextBoxFor(m => m.TeachingAssignment.AssigmentDate, new { @class = "form-control datePicker" })
+                    <span asp-validation-for="TeachingAssignment.AssigmentDate" class="text-danger"></span>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-6">
-                <label asp-for="TeachingAssignment.Observations"></label>
-                <textarea asp-for="TeachingAssignment.Observations" class="form-control" rows="4" placeholder="Ejemplo: Docente expero en el tema.">
+            <div class="row">
+                <div class="col-sm-6">
+                    <label asp-for="TeachingAssignment.Observations"></label>
+                    <textarea asp-for="TeachingAssignment.Observations" class="form-control" rows="4" placeholder="Ejemplo: Docente experto en el tema.">
             </textarea>
-            </div>
-            <div class="col-sm-6">
-                <div class="col-4 mb-3">
-                    <label asp-for="TeachingAssignment.Active"></label>
                 </div>
-                <div class="col-4 mb-3">
-                    <select asp-for="TeachingAssignment.Active" class="form-control">
-                        <option value=true>Activo</option>
-                        <option value=false>Inactivo</option>
-                    </select>
+                <div class="col-sm-6">
+                    <div class="col-4 mb-3">
+                        <label asp-for="TeachingAssignment.Active"></label>
+                    </div>
+                    <div class="col-4 mb-3">
+                        <select asp-for="TeachingAssignment.Active" class="form-control">
+                            <option value=true>Activo</option>
+                            <option value=false>Inactivo</option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="form-group row mb-1 mt-3">
-        <div class="col-8 offset-2">
-            @if (Model.TeachingAssignment.Id != 0)
-            {
-                <partial name="_ButtonsUpdateAndReturn" model="Model.TeachingAssignment.Id" />
-            }
-            else
-            {
-                <partial name="_ButtonsCreateAndReturn" />
-            }
+        <div class="form-group row mb-1 mt-3">
+            <div class="col-8 offset-2">
+                @if (Model.TeachingAssignment.Id != 0)
+                {
+                    <partial name="_ButtonsUpdateAndReturn" model="Model.TeachingAssignment.Id" />
+                }
+                else
+                {
+                    <partial name="_ButtonsCreateAndReturn" />
+                }
+            </div>
         </div>
-    </div>
-</form>
+    </form>
+</body>
 </html>
 
 @section Scripts {
+    <script src="~/js/datepicker.js"></script>
     <partial name="_ValidationScriptsPartial" />
 }

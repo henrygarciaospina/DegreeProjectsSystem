@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DegreeProjectsSystem.DataAccess.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -173,7 +173,6 @@ namespace DegreeProjectsSystem.DataAccess.Migrations
                     TitleDegreeWork = table.Column<string>(maxLength: 200, nullable: false),
                     ActNumber = table.Column<string>(maxLength: 20, nullable: false),
                     ActDate = table.Column<DateTime>(nullable: false),
-                    ModalityChange = table.Column<bool>(nullable: false),
                     Observations = table.Column<string>(maxLength: 200, nullable: true),
                     Active = table.Column<bool>(nullable: false)
                 },
@@ -715,19 +714,19 @@ namespace DegreeProjectsSystem.DataAccess.Migrations
                         column: x => x.PersonTypePersonId,
                         principalTable: "PersonTypePeople",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_TeachingAssigments_Solicitudes_SolicitudeId",
                         column: x => x.SolicitudeId,
                         principalTable: "Solicitudes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_TeachingAssigments_TeachingFunctions_TeachingFunctionId",
                         column: x => x.TeachingFunctionId,
                         principalTable: "TeachingFunctions",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

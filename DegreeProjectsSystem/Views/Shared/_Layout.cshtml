@@ -6,8 +6,8 @@
     <title>@ViewData["Title"] - DegreeProjectsSystem</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-
-    <link rel="stylesheet" href="~/css/bootstrap-datetimepicker.css" />
+    <link href="~/lib/jquery-ui-1.13.1.custom/jquery-ui.min.css" rel="stylesheet" />
+   
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
 </head>
@@ -291,8 +291,7 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <script src="https://kit.fontawesome.com/e19c476714.js"></script>
-
-    <script src="~/js/bootstrap-datetimepicker.js"></script>
+    <script src="~/lib/jquery-ui-1.13.1.custom/jquery-ui.min.js"></script>
     @await Component.InvokeAsync("Notyf")
     @RenderSection("Scripts", required: false)
 </body>

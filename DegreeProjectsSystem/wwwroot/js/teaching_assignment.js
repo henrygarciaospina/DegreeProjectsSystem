@@ -18,7 +18,9 @@ function loadDataTable() {
             { "data": "solicitude.actNumber" },
             { "data": "personTypePerson.person.fullName" },
             { "data": "teachingFunction.name" },
-            { "data": "assigmentDate" },
+            {
+              "data": "assigmentDate"
+            },
             { "data": "observations" },
             {
                 "data": "active",

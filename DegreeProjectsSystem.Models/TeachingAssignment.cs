@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -34,7 +35,7 @@ namespace DegreeProjectsSystem.Models
         public TeachingFunction TeachingFunction { get; set; }
 
         [Display(Name = "Fecha de asignación")]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime AssigmentDate { get; set; }
 
         [MaxLength(200, ErrorMessage = "El campo {0} debe tener menos de {1} caracteres")]

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DegreeProjectsSystem.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220109181852_Initial")]
-    partial class Initial
+    [Migration("20220115154208_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -649,9 +649,6 @@ namespace DegreeProjectsSystem.DataAccess.Migrations
                         .HasMaxLength(20);
 
                     b.Property<bool>("Active")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("ModalityChange")
                         .HasColumnType("bit");
 
                     b.Property<string>("Observations")

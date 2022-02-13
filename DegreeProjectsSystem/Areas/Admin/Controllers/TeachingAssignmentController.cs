@@ -68,6 +68,7 @@ namespace DegreeProjectsSystem.Areas.Admin.Controllers
                 }),
             };
 
+            teachingAssignmentViewModel.TeachingAssignment.AssigmentDate = DateTime.Now;
             // Crea un nuevo registro
             if (id == null)
             {
@@ -81,7 +82,7 @@ namespace DegreeProjectsSystem.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-
+           
             return View(teachingAssignmentViewModel);
         }
 
