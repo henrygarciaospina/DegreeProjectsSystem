@@ -38,6 +38,8 @@ namespace DegreeProjectsSystem.Areas.Admin.Controllers
 
         public IActionResult InsertOrUpdateStudentRequest(int? id)
         {
+            var config = _unitWork.Config.GetFirst();
+
             StudentRequestViewModel studentRequestViewModel = new StudentRequestViewModel()
             {
                 StudentRequest = new StudentRequest(),
@@ -48,11 +50,13 @@ namespace DegreeProjectsSystem.Areas.Admin.Controllers
                     Value = sl.Id.ToString()
                 }).ToList(),
 
-                PersonList = _unitWork.Person.GetAll(pe => pe.Active == true, orderBy: pe => pe.OrderBy(pe => pe.Surnames + pe.Names)).Select(pe => new SelectListItem
+                PersonTypePersonList = _unitWork.PersonTypePerson
+                .GetAll(pe => pe.TypePerson.Id == config.StudenTypeId, includeProperties: "Person")
+                .Select(pe => new SelectListItem
                 {
-                    Text = pe.Names + " " + pe.Surnames,
+                    Text = pe.Person.FullName,
                     Value = pe.Id.ToString()
-                }).ToList(),
+                }),
             };
 
             // Crea un nuevo registro
@@ -158,17 +162,21 @@ namespace DegreeProjectsSystem.Areas.Admin.Controllers
 
         public ViewResult LoadLists(StudentRequestViewModel studentRequestViewModel, string message)
         {
+            var config = _unitWork.Config.GetFirst();
+
             studentRequestViewModel.SolicitudeList = _unitWork.Solicitude.GetAll().Select(sl => new SelectListItem
             {
                 Text = sl.TitleDegreeWork + " - " + "Acta No. " + sl.ActNumber,
                 Value = sl.Id.ToString()
             }).ToList();
 
-            studentRequestViewModel.PersonList = _unitWork.Person.GetAll(pe => pe.Active == true, orderBy: pe => pe.OrderBy(pe => pe.Surnames + pe.Names)).Select(pe => new SelectListItem
-            {
-                Text = pe.Names + " " + pe.Surnames,
-                Value = pe.Id.ToString()
-            }).ToList();
+            studentRequestViewModel.PersonTypePersonList = _unitWork.PersonTypePerson
+                .GetAll(pe => pe.TypePerson.Id == config.StudenTypeId, includeProperties: "Person")
+                .Select(pe => new SelectListItem
+                {
+                    Text = pe.Person.FullName,
+                    Value = pe.Id.ToString()
+                });
 
             if (!string.IsNullOrEmpty(message))
             {
@@ -184,7 +192,7 @@ namespace DegreeProjectsSystem.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAllStudentRequests()
         {
-            var studentRequests = _unitWork.StudentRequest.GetAll(includeProperties: "Solicitude,Person");
+            var studentRequests = _unitWork.StudentRequest.GetAll(includeProperties: "Solicitude,PersonTypePerson.Person");
             return Json(new { data = studentRequests });
         }
 

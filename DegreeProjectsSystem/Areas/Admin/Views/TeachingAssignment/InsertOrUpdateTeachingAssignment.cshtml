@@ -68,7 +68,7 @@
                 </div>
                 <div class="col-sm-6 input-append">
                     <label asp-for="TeachingAssignment.AssigmentDate" class="control-label"></label>
-                    @Html.TextBoxFor(m => m.TeachingAssignment.AssigmentDate, new { @class = "form-control datePicker" })
+                    @Html.TextBoxFor(ad => ad.TeachingAssignment.AssigmentDate, new { @class = "form-control datePicker" })
                     <span asp-validation-for="TeachingAssignment.AssigmentDate" class="text-danger"></span>
                 </div>
             </div>

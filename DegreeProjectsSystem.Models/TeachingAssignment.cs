@@ -34,8 +34,9 @@ namespace DegreeProjectsSystem.Models
         [ForeignKey("TeachingFunctionId")]
         public TeachingFunction TeachingFunction { get; set; }
 
+        [DataType(DataType.Date)]
         [Display(Name = "Fecha de asignación")]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime AssigmentDate { get; set; }
 
         [MaxLength(200, ErrorMessage = "El campo {0} debe tener menos de {1} caracteres")]

@@ -13,11 +13,11 @@ function loadDataTable() {
             "url": "/Admin/StudentRequest/GetAllStudentRequests"
         },
         "columns": [
-            { "data": "solicitude.titleDegreeWork", "width": "25%" },
+            { "data": "solicitude.titleDegreeWork", "width": "15%" },
             { "data": "solicitude.actNumber", "width": "10%" },
-            { "data": "person.identificationNumber", "width": "10%" },
-            { "data": "person.names", "width": "15%" },
-            { "data": "person.surnames", "width": "20%" },
+            { "data": "personTypePerson.person.identificationNumber", "width": "10%" },
+            { "data": "personTypePerson.person.names", "width": "20%" },
+            { "data": "personTypePerson.person.surnames", "width": "15%" },
             {
                 "data": "active",
                 "render": function (data) {

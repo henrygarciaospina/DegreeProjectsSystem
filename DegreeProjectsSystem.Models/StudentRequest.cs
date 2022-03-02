@@ -16,13 +16,13 @@ namespace DegreeProjectsSystem.Models
         [ForeignKey("SolicitudeId")]
         public Solicitude Solicitude { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Debe asignar un Estudiante a la Solicitud")]
-        public int PersonId { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Debe seleccionar un Estudiante")]
+        public int PersonTypePersonId { get; set; }
 
-        [Display(Name = "Estudiante")]
+        [Display(Name = "Nombres y Apellidos")]
         //Foreign key
-        [ForeignKey("PersonId")]
-        public Person Person { get; set; }
+        [ForeignKey("PersonTypePersonId")]
+        public PersonTypePerson PersonTypePerson { get; set; }
 
         [DataType(DataType.MultilineText)]
         [Display(Name = "Observaciones")]

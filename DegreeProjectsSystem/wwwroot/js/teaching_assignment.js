@@ -10,6 +10,24 @@ function loadDataTable() {
         language: {
             "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json"
         },
+        //Para usar los botones
+        responsive: "true",
+        dom: 'Blfrtip',
+        buttons: [
+            {
+                extend: 'excelHtml5',
+                text: '<i class="fas fa-file-excel"></i>',
+                titleAttr: 'Exportar a Excel',
+                className: 'btn btn-success'
+            },
+            {
+                extend: 'pdfHtml5',
+                text: '<i class="fas fa-file-pdf"></i> ',
+                titleAttr: 'Exportar a Pdf',
+                className: 'btn btn-danger'
+            },
+        ],
+
         "ajax": {
             "url": "/Admin/TeachingAssignment/GetAllTeachingAssignments"
         },

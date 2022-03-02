@@ -676,7 +676,7 @@ namespace DegreeProjectsSystem.DataAccess.Migrations
                     b.Property<string>("Observations")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PersonId")
+                    b.Property<int>("PersonTypePersonId")
                         .HasColumnType("int");
 
                     b.Property<int>("SolicitudeId")
@@ -684,9 +684,9 @@ namespace DegreeProjectsSystem.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SolicitudeId");
+                    b.HasIndex("PersonTypePersonId");
 
-                    b.HasIndex("PersonId", "SolicitudeId")
+                    b.HasIndex("SolicitudeId", "PersonTypePersonId")
                         .IsUnique();
 
                     b.ToTable("StudentRequests");
@@ -1187,9 +1187,9 @@ namespace DegreeProjectsSystem.DataAccess.Migrations
 
             modelBuilder.Entity("DegreeProjectsSystem.Models.StudentRequest", b =>
                 {
-                    b.HasOne("DegreeProjectsSystem.Models.Person", "Person")
+                    b.HasOne("DegreeProjectsSystem.Models.PersonTypePerson", "PersonTypePerson")
                         .WithMany()
-                        .HasForeignKey("PersonId")
+                        .HasForeignKey("PersonTypePersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

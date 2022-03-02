@@ -1,4 +1,4 @@
-﻿@model DegreeProjectsSystem.Models.ViewModels.StudentRequestViewModel 
+﻿@model DegreeProjectsSystem.Models.ViewModels.StudentRequestViewModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     var title = "Asignar Solicitud a Estudiante";
@@ -20,61 +20,54 @@
         <h2 class="text-primary">@title</h2>
     </div>
     <div class="col-8 pt-4">
-        
-    <div class="form-group row">
-        <div class="col-4 mb-3">
-            <label asp-for="StudentRequest.Solicitude.TitleDegreeWork"></label>
-        </div>
-        <div class="col-8 mb-3">
-            @Html.DropDownListFor(sst => sst.StudentRequest.SolicitudeId, Model.SolicitudeList,
-            "Seleccione una solicitud....",
-            new { @class = "form-control" })
-            <span asp-validation-for="StudentRequest.SolicitudeId" class="text-danger"></span>
-        </div>
-    </div>
-
-        
 
         <div class="form-group row">
             <div class="col-4 mb-3">
-                <label asp-for="StudentRequest.Person.Names"></label>
+                <label asp-for="StudentRequest.Solicitude.TitleDegreeWork"></label>
             </div>
             <div class="col-8 mb-3">
-
-                @Html.DropDownListFor(st => st.StudentRequest.PersonId, Model.PersonList,
-                       "Seleccione un estudiante....",
-                       new { @class = "form-control" })
-                <span asp-validation-for="StudentRequest.PersonId" class="text-danger"></span>
+                @Html.DropDownListFor(sst => sst.StudentRequest.SolicitudeId, Model.SolicitudeList,
+                "Seleccione una solicitud....",
+                new { @class = "form-control" })
+                <span asp-validation-for="StudentRequest.SolicitudeId" class="text-danger"></span>
             </div>
         </div>
-
         <div class="form-group row">
             <div class="col-4 mb-3">
-                <label asp-for="StudentRequest.Active"></label>
+                <label asp-for="StudentRequest.PersonTypePerson.Person.Names"></label>
             </div>
-            <div class="col-4 mb-3">
-                <select asp-for="StudentRequest.Active" class="form-control">
-                    <option value=true>Activo</option>
-                    <option value=false>Inactivo</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="form-group row mb-3">
-            <div class="col-8 offset-4">
-                @if (Model.StudentRequest.Id != 0)
-                {
-                    <partial name="_ButtonsUpdateAndReturn" model="Model.StudentRequest.Id" />
-                }
-                else
-                {
-                    <partial name="_ButtonsCreateAndReturn" />
-                }
+            <div class="col-8 mb-3">
+                @Html.DropDownListFor(sr => sr.StudentRequest.PersonTypePersonId, Model.PersonTypePersonList,
+                       "Seleccione un estudiante....",
+                       new { @class = "form-control" })
+                <span asp-validation-for="StudentRequest.PersonTypePersonId" class="text-danger"></span>
             </div>
         </div>
-
+    </div>
+    <div class="form-group row">
+        <div class="col-4 mb-3">
+            <label asp-for="StudentRequest.Active"></label>
+        </div>
+        <div class="col-4 mb-3">
+            <select asp-for="StudentRequest.Active" class="form-control">
+                <option value=true>Activo</option>
+                <option value=false>Inactivo</option>
+            </select>
+        </div>
     </div>
 
+    <div class="form-group row mb-3">
+        <div class="col-8 offset-4">
+            @if (Model.StudentRequest.Id != 0)
+            {
+                <partial name="_ButtonsUpdateAndReturn" model="Model.StudentRequest.Id" />
+            }
+            else
+            {
+                <partial name="_ButtonsCreateAndReturn" />
+            }
+        </div>
+    </div>
 </form>
 
 @section Scripts {

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DegreeProjectsSystem.DataAccess.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -639,34 +639,6 @@ namespace DegreeProjectsSystem.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "StudentRequests",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SolicitudeId = table.Column<int>(nullable: false),
-                    PersonId = table.Column<int>(nullable: false),
-                    Observations = table.Column<string>(nullable: true),
-                    Active = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_StudentRequests", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_StudentRequests_People_PersonId",
-                        column: x => x.PersonId,
-                        principalTable: "People",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_StudentRequests_Solicitudes_SolicitudeId",
-                        column: x => x.SolicitudeId,
-                        principalTable: "Solicitudes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "CareerPeople",
                 columns: table => new
                 {
@@ -689,6 +661,34 @@ namespace DegreeProjectsSystem.DataAccess.Migrations
                         name: "FK_CareerPeople_People_PersonId",
                         column: x => x.PersonId,
                         principalTable: "People",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "StudentRequests",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SolicitudeId = table.Column<int>(nullable: false),
+                    PersonTypePersonId = table.Column<int>(nullable: false),
+                    Observations = table.Column<string>(nullable: true),
+                    Active = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StudentRequests", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_StudentRequests_PersonTypePeople_PersonTypePersonId",
+                        column: x => x.PersonTypePersonId,
+                        principalTable: "PersonTypePeople",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_StudentRequests_Solicitudes_SolicitudeId",
+                        column: x => x.SolicitudeId,
+                        principalTable: "Solicitudes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -974,14 +974,14 @@ namespace DegreeProjectsSystem.DataAccess.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_StudentRequests_SolicitudeId",
+                name: "IX_StudentRequests_PersonTypePersonId",
                 table: "StudentRequests",
-                column: "SolicitudeId");
+                column: "PersonTypePersonId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_StudentRequests_PersonId_SolicitudeId",
+                name: "IX_StudentRequests_SolicitudeId_PersonTypePersonId",
                 table: "StudentRequests",
-                columns: new[] { "PersonId", "SolicitudeId" },
+                columns: new[] { "SolicitudeId", "PersonTypePersonId" },
                 unique: true);
 
             migrationBuilder.CreateIndex(

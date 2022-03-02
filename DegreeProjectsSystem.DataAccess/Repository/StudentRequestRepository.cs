@@ -20,7 +20,7 @@ namespace DegreeProjectsSystem.DataAccess.Repository
             if (studentRequestDb != null)
             {
                 studentRequestDb.SolicitudeId = studentRequest.SolicitudeId;
-                studentRequestDb.PersonId = studentRequest.PersonId;
+                studentRequestDb.PersonTypePersonId = studentRequest.PersonTypePersonId;
                 studentRequestDb.Observations = studentRequest.Observations;
                 studentRequestDb.Active = studentRequest.Active;
             }

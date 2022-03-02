@@ -188,7 +188,7 @@ namespace DegreeProjectsSystem.Areas.Admin.Controllers
                 .GetAll(pe => pe.TypePerson.Id == config.TeacherTypeId, includeProperties: "Person")
                 .Select(pe => new SelectListItem
                 {
-                    Text = pe.Person.Names + " " + pe.Person.Surnames,
+                    Text = pe.Person.FullName,
                     Value = pe.Id.ToString()
                 });
 

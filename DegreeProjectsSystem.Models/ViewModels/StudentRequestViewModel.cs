@@ -7,6 +7,8 @@ namespace DegreeProjectsSystem.Models.ViewModels
     {
         public StudentRequest StudentRequest { get; set; }
         public IEnumerable<SelectListItem> SolicitudeList { get; set; }
-        public IEnumerable<SelectListItem> PersonList { get; set; }
+
+        public IEnumerable<SelectListItem> PersonTypePersonList { get; set; }
+        //public IEnumerable<SelectListItem> PersonList { get; set; }
     }
 }

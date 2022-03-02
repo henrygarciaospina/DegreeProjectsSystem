@@ -120,7 +120,7 @@ namespace DegreeProjectsSystem.DataAccess.Data
                .HasIndex(re => new { re.Name })
                .IsUnique();
             modelBuilder.Entity<StudentRequest>()
-                .HasIndex(sr => new { sr.PersonId, sr.SolicitudeId })
+                .HasIndex(sr => new { sr.SolicitudeId, sr.PersonTypePersonId })
                .IsUnique();
 
             modelBuilder.Entity<Submodality>()
