@@ -4,14 +4,16 @@ using DegreeProjectsSystem.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DegreeProjectsSystem.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220303043049_AddTableAssignmentModalitySubmodalityToDB")]
+    partial class AddTableAssignmentModalitySubmodalityToDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,7 +48,7 @@ namespace DegreeProjectsSystem.DataAccess.Migrations
                     b.HasIndex("ModalitySubmodalityId", "StudentRequestId")
                         .IsUnique();
 
-                    b.ToTable("AssignmentModalitySubmodalities");
+                    b.ToTable("AssignmentModalitySubmodality");
                 });
 
             modelBuilder.Entity("DegreeProjectsSystem.Models.Career", b =>

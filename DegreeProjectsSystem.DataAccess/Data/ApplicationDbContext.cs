@@ -12,6 +12,8 @@ namespace DegreeProjectsSystem.DataAccess.Data
         }
 
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
+
+        public DbSet<AssignmentModalitySubmodality> AssignmentModalitySubmodalities { get; set; }
         public DbSet<Career> Careers { get; set; }
         public DbSet<CareerPerson> CareerPeople { get; set; }
         public DbSet<City> Cities { get; set; }
@@ -43,6 +45,10 @@ namespace DegreeProjectsSystem.DataAccess.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<AssignmentModalitySubmodality>()
+                .HasIndex(ams => new { ams.ModalitySubmodalityId, ams.StudentRequestId })
+                .IsUnique();
 
             modelBuilder.Entity<Career>()
                 .HasIndex(ca => ca.Name)

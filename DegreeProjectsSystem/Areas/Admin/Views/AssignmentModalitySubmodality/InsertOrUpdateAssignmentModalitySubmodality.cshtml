@@ -1,0 +1,88 @@
+﻿@model DegreeProjectsSystem.Models.ViewModels.AssignmentModalitySubmodalityViewModel
+
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = "Crear Asignación Modalidad/Submodalidad";
+}
+
+<form class="form-horizontal" role="form" method="post">
+    <div class="row p-3 border-0">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    </div>
+    @if (Model.AssignmentModalitySubmodality.Id != 0)
+    {
+        // Actualizar
+        title = "Actualizar Asignación Modalidad/Submodalidad";
+        <input type="hidden" asp-for="AssignmentModalitySubmodality.Id" />
+    }
+
+
+    <div class="container">
+        <div class="col-12 border-bottom mt-5">
+            <h2 class="text-primary">@title</h2>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-4 mb-3">
+                <label asp-for="AssignmentModalitySubmodality.StudentRequest.Solicitude.TitleDegreeWork"></label>
+            </div>
+            <div class="col-8 mb-3">
+                @Html.DropDownListFor(ams => ams.AssignmentModalitySubmodality.StudentRequestId, Model.StudentRequestList,
+                "Seleccione una solicitud....",
+                new { @class = "form-control" })
+                <span asp-validation-for="AssignmentModalitySubmodality.StudentRequestId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-4 mb-3">
+                <label>Seleccione una Modalidad/Submodalidad</label>
+            </div>
+            <div class="col-8 mb-3">
+                @Html.DropDownListFor(ams => ams.AssignmentModalitySubmodality.ModalitySubmodalityId, Model.ModalitySubmodalityList,
+                       "Seleccione una modalidad/submodalidad....",
+                       new { @class = "form-control" })
+                <span asp-validation-for="AssignmentModalitySubmodality.ModalitySubmodalityId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group row">
+                <div class="col-4 mb-3">
+                    <label asp-for="AssignmentModalitySubmodality.Observations"></label>
+                </div>
+                <div class="col-8 mb-3">
+                    <textarea asp-for="AssignmentModalitySubmodality.Observations" class="form-control" rows="4" placeholder="Ejemplo: Docente experto en el tema.">
+                    </textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="col-4 mb-3">
+                    <label asp-for="AssignmentModalitySubmodality.Active"></label>
+                </div>
+                <div class="col-4 mb-3">
+                    <select asp-for="AssignmentModalitySubmodality.Active" class="form-control">
+                        <option value=true>Activo</option>
+                        <option value=false>Inactivo</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row mb-1 mt-3">
+        <div class="col-8 offset-2">
+            @if (Model.AssignmentModalitySubmodality.Id != 0)
+            {
+                <partial name="_ButtonsUpdateAndReturn" model="Model.AssignmentModalitySubmodality.Id" />
+            }
+            else
+            {
+                <partial name="_ButtonsCreateAndReturn" />
+            }
+        </div>
+    </div>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

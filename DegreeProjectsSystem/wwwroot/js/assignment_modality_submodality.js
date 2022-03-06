@@ -9,18 +9,15 @@ function loadDataTable() {
         "autoWidth": true,
         language: {
             "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json"
-        },
+        },     
         "ajax": {
-            "url": "/Admin/TeachingAssignment/GetAllTeachingAssignments"
+            "url": "/Admin/AssignmentModalitySubModality/GetAllAssignmentModalitySubmodalities"
         },
         "columns": [
-            { "data": "solicitude.titleDegreeWork" },
-            { "data": "solicitude.actNumber" },
-            { "data": "personTypePerson.person.fullName" },
-            { "data": "teachingFunction.name" },
-            {
-              "data": "assigmentDate"
-            },
+            { "data": "studentRequest.solicitude.titleDegreeWork" },
+            { "data": "studentRequest.solicitude.actNumber" },
+            { "data": "modalitySubmodality.modality.name" },
+            { "data": "modalitySubmodality.submodality.name" },
             { "data": "observations" },
             {
                 "data": "active",
@@ -44,13 +41,13 @@ function loadDataTable() {
                     if (!active) {
                         return `
                             <div class="text-center">
-                                <a href="/Admin/TeachingAssignment/InsertOrUpdateTeachingAssignment/${data}" class="btn btn-block btn-warning text-white" style="cursor:pointer;">
+                                <a href="/Admin/AssignmentModalitySubmodality/InsertOrUpdateAssignmentModalitySubmodality/${data}" class="btn btn-block btn-warning text-white" style="cursor:pointer;">
                                     <i class="far fa-edit"></i>
                                 </a>
-                                <a onclick=Delete("/Admin/TeachingAssignment/DeleteTeachingAssignment/${data}") class="btn btn-block btn-danger disabled text-white" disabled style="cursor:pointer;">
+                                <a onclick=Delete("/Admin/AssignmentModalitySubmodalityt/DeleteAssignmentModalitySubmodality/${data}") class="btn btn-block btn-danger disabled text-white" disabled style="cursor:pointer;">
                                     <i class="far fa-trash-alt"></i>
                                 </a>
-                                <a href="/Admin/TeachingAssignment/DetailTeachingAssignment/${data}" class="btn btn-block btn-primary text-white" style="cursor:pointer">
+                                <a href="/Admin/AssignmentModalitySubmodality/DetailAssignmentModalitySubmodality/${data}" class="btn btn-block btn-primary text-white" style="cursor:pointer">
                                      <i class="far fa-eye"></i>
                                 </a>
                             </div>
@@ -59,13 +56,13 @@ function loadDataTable() {
                     else {
                         return `
                         <div class="text-center">
-                            <a href="/Admin/TeachingAssignment/InsertOrUpdateTeachingAssignment/${data}" class="btn btn-block btn-warning text-white" style="cursor:pointer;">
+                            <a href="/Admin/AssignmentModalitySubmodality/InsertOrUpdateAssignmentModalitySubmodality/${data}" class="btn btn-block btn-warning text-white" style="cursor:pointer;">
                                 <i class="far fa-edit"></i>
                             </a>
-                            <a onclick=Delete("/Admin/TeachingAssignment/DeleteTeachingAssignment/${data}") class="btn btn-block btn-danger text-white" style="cursor:pointer;">
+                            <a onclick=Delete("/Admin/AssignmentModalitySubmodality/DeleteAssignmentModalitySubmodality/${data}") class="btn btn-block btn-danger text-white" style="cursor:pointer;">
                                     <i class="far fa-trash-alt"></i>
                             </a>
-                            <a href="/Admin/TeachingAssignment/DetailTeachingAssignment/${data}" class="btn btn-block btn-primary text-white" style="cursor:pointer">
+                            <a href="/Admin/AssignmentModalitySubmodality/DetailAssignmentModalitySubmodality/${data}" class="btn btn-block btn-primary text-white" style="cursor:pointer">
                                 <i class="far fa-eye"></i>
                             </a>
                             </div >
@@ -80,7 +77,7 @@ function loadDataTable() {
 
 function Delete(url) {
     swal({
-        title: "Esta Seguro que quiere Borrar la asignación docente?.",
+        title: "Esta Seguro que quiere Borrar la asignaciòn modalidad/submodalidad?.",
         text: "Este registro se puede  recuperar actualizando su estado a Activo.",
         icon: "warning",
         buttons: true,

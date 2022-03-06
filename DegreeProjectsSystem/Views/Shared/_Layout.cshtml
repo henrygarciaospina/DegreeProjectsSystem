@@ -11,10 +11,6 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
 
-    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.15/css/dataTables.bootstrap4.min.css" />
-    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/buttons/1.3.1/css/buttons.bootstrap4.min.css" />
-
-
 </head>
 <body>
     <header>
@@ -116,7 +112,7 @@
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Tablas Relacionadas
+                                Tablas Maestro/Detalle
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" asp-area="Admin" asp-controller="TeachingAssignment" asp-action="Index">
@@ -165,6 +161,13 @@
                                         <span class="p-1 font-menu">
                                             Modalidades/Submodalidades
                                         </span>
+                                    </i>
+                                </a>
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="AssignmentModalitySubmodality" asp-action="Index">
+                                    <i class="fa fa-map-o" aria-hidden="true">
+                                    <span class="p-1 font-menu">
+                                        Asig. Mod/Subm T. Grad.
+                                    </span>
                                     </i>
                                 </a>
                                 <a class="dropdown-item" asp-area="Admin" asp-controller="Person" asp-action="Index">
@@ -234,17 +237,6 @@
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Maestros Detalle
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Reportes
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -297,21 +289,6 @@
 
     <script src="https://kit.fontawesome.com/e19c476714.js"></script>
     <script src="~/lib/jquery-ui-1.13.1.custom/jquery-ui.min.js"></script>
-
-
-    @*Librerias para exportar los datatables*@
-    <script type="text/javascript" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="//cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js"></script>
-    <script type="text/javascript" src="//cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
-    <script type="text/javascript" src="//cdn.datatables.net/buttons/1.3.1/js/buttons.bootstrap4.min.js"></script>
-
-    @*Librerias para exportar los datatables*@
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-    <script type="text/javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/pdfmake.min.js"></script>
-    <script type="text/javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/vfs_fonts.js"></script>
-    <script type="text/javascript" src="//cdn.datatables.net/buttons/1.3.1/js/buttons.html5.min.js"></script>
-
-
 
     @await Component.InvokeAsync("Notyf")
     @RenderSection("Scripts", required: false)

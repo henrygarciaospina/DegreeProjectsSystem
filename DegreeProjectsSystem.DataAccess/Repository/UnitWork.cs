@@ -7,6 +7,8 @@ namespace DegreeProjectsSystem.DataAccess.Repository
     {
         private readonly ApplicationDbContext _db;
         public IApplicationUserRepository ApplicationUser { get; private set; }
+
+        public IAssignmentModalitySubmodalityRepository AssignmentModalitySubmodality { get; private set; }
         public ICareerRepository Career { get; private set; }
         public ICareerPersonRepository CareerPerson { get; private set; }
         public ICityRepository City { get; private set; }
@@ -38,6 +40,7 @@ namespace DegreeProjectsSystem.DataAccess.Repository
         {
             _db = db;
             ApplicationUser = new ApplicationUserRepository(_db);
+            AssignmentModalitySubmodality = new AssignmentModalitySubmodalityRepository(_db);
             Career = new CareerRepository(_db); // Inicializamos
             CareerPerson = new CareerPersonRepository(_db);
             City = new CityRepository(_db);
