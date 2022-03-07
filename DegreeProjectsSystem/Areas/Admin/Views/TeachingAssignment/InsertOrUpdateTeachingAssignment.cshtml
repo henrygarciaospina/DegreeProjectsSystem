@@ -24,21 +24,15 @@
         </div>
 
         <div class="row mt-2">
-            <div class="col-4 mb-3">
+            <div class="col-sm-6">
                 <label asp-for="TeachingAssignment.Solicitude.TitleDegreeWork"></label>
-            </div>
-            <div class="col-8 mb-3">
                 @Html.DropDownListFor(ta => ta.TeachingAssignment.SolicitudeId, Model.SolicitudeList,
                 "Seleccione una solicitud....",
                 new { @class = "form-control" })
                 <span asp-validation-for="TeachingAssignment.SolicitudeId" class="text-danger"></span>
             </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-4 mb-3">
+            <div class="col-sm-6">
                 <label asp-for="TeachingAssignment.PersonTypePerson.Person.Names"></label>
-            </div>
-            <div class="col-8 mb-3">
                 @Html.DropDownListFor(ta => ta.TeachingAssignment.PersonTypePersonId, Model.PersonTypePersonList,
                        "Seleccione un docente....",
                        new { @class = "form-control" })
@@ -46,18 +40,14 @@
             </div>
         </div>
         <div class="row">
-            <div class="form-group row">
-                <div class="col-4 mb-3">
-                    <label asp-for="TeachingAssignment.TeachingFunction.Name"></label>
-                </div>
-                <div class="col-8 mb-3">
-                    @Html.DropDownListFor(tf => tf.TeachingAssignment.TeachingFunctionId, Model.TeachingFunctionList,
-                           "Seleccione una función docente....",
-                           new { @class = "form-control" })
-                    <span asp-validation-for="TeachingAssignment.TeachingFunctionId" class="text-danger"></span>
-                </div>
+            <div class="col-sm-6">
+                <label asp-for="TeachingAssignment.TeachingFunction.Name"></label>
+                @Html.DropDownListFor(tf => tf.TeachingAssignment.TeachingFunctionId, Model.TeachingFunctionList,
+                       "Seleccione una función docente....",
+                       new { @class = "form-control" })
+                <span asp-validation-for="TeachingAssignment.TeachingFunctionId" class="text-danger"></span>
             </div>
-            <div class="col-sm-6 input-append">
+            <div class="col-sm-6">
                 <label asp-for="TeachingAssignment.AssigmentDate" class="control-label"></label>
                 @Html.TextBoxFor(ad => ad.TeachingAssignment.AssigmentDate, new { @class = "form-control datePicker" })
                 <span asp-validation-for="TeachingAssignment.AssigmentDate" class="text-danger"></span>
@@ -70,15 +60,11 @@
             </textarea>
             </div>
             <div class="col-sm-6">
-                <div class="col-4 mb-3">
-                    <label asp-for="TeachingAssignment.Active"></label>
-                </div>
-                <div class="col-4 mb-3">
-                    <select asp-for="TeachingAssignment.Active" class="form-control">
-                        <option value=true>Activo</option>
-                        <option value=false>Inactivo</option>
-                    </select>
-                </div>
+                <label asp-for="TeachingAssignment.Active"></label>
+                <select asp-for="TeachingAssignment.Active" class="form-control">
+                    <option value=true>Activo</option>
+                    <option value=false>Inactivo</option>
+                </select>
             </div>
         </div>
     </div>

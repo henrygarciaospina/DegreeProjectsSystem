@@ -207,7 +207,46 @@ namespace DegreeProjectsSystem.Areas.Admin.Controllers
             }
 
             return View(teachingAssignmentViewModel);
+        }
 
+        //Details TeachingAssigment
+        public IActionResult DetailTeachingAssignment(int? id)
+        {
+            var config = _unitWork.Config.GetFirst();
+
+            TeachingAssignmentViewModel teachingAssignmentViewModel = new TeachingAssignmentViewModel()
+            {
+                SolicitudeList = _unitWork.Solicitude.GetAll(sl => sl.Active == true, orderBy: sl => sl.OrderBy(sl => sl.TitleDegreeWork)).Select(sl => new SelectListItem
+                {
+                    Text = sl.TitleDegreeWork + " - " + "Acta No. " + sl.ActNumber,
+                    Value = sl.Id.ToString()
+                }).ToList(),
+
+                PersonTypePersonList = _unitWork.PersonTypePerson
+                .GetAll(pe => pe.TypePerson.Id == config.TeacherTypeId, includeProperties: "Person")
+                .Select(pe => new SelectListItem
+                {
+                    Text = pe.Person.Names + " " + pe.Person.Surnames,
+                    Value = pe.Id.ToString()
+                }),
+
+                TeachingFunctionList = _unitWork.TeachingFunction
+                .GetAll(tf => tf.Active, orderBy: tf => tf.OrderBy(tf => tf.Name))
+                .Select(tf => new SelectListItem
+                {
+                    Text = tf.Name,
+                    Value = tf.Id.ToString()
+                }),
+
+            };
+
+            teachingAssignmentViewModel.TeachingAssignment = _unitWork.TeachingAssignment.Get(id.GetValueOrDefault());
+            if (teachingAssignmentViewModel.TeachingAssignment == null)
+            {
+                return NotFound();
+            }
+
+            return View(teachingAssignmentViewModel);
         }
 
         #region API

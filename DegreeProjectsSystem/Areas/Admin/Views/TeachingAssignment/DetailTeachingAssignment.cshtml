@@ -1,29 +1,44 @@
-﻿@model DegreeProjectsSystem.Models.ViewModels.PersonViewModel
+﻿@model DegreeProjectsSystem.Models.ViewModels.TeachingAssignmentViewModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var title = "Detalle Persona";
+    var degreeWork = "Datos trabajo de grado";
+    var assignedTeacher = "Datos docentes";
 }
 
 <div class="container-fluid">
     <div class="container-detail mt-3">
         <div class="card-detail ml-1">
             <div class="col-12 border-bottom mt-3 px-2">
-                <h2 class="text-primary">@title</h2>
+                <h2 class="text-primary">@degreeWork</h2>
             </div>
 
             <div class="row mt-2 px-2">
                 <div class="col-sm-6">
-                    <label class ="fw-bold" asp-for="Person.IdentificationNumber"></label>
-                    <input asp-for="Person.IdentificationNumber" disabled class="form-control" />
+                    <label class="fw-bold" asp-for="TeachingAssignment.Solicitude.TitleDegreeWork"></label>
+                    <input asp-for="TeachingAssignment.Solicitude.TitleDegreeWork" disabled class="form-control" />
                 </div>
                 <div class="col-sm-6">
-                    <label class="fw-bold" asp-for="Person.IdentityDocumentType"></label>
-                    @Html.DropDownListFor(idt => idt.Person.IdentityDocumentTypeId, Model.IdentityDocumentTypeList,
-                    "Seleccione un Tipo de Documento....",
-                    new { @class = "form-control", @disabled = "disabled" })
+                    <label class="fw-bold" asp-for="TeachingAssignment.Solicitude.ActNumber"></label>
+                    <input asp-for="TeachingAssignment.Solicitude.ActNumber" disabled class="form-control" />
                 </div>
+                <div class="row">
+                    <h2 class="text-primary">@assignedTeacher</h2>
+                    <textarea asp-for="TeachingAssignment.PersonTypePerson.Person.FullName" disabled class="form-control">
+                    </textarea>
+                </div>
+                    
+                        
+             
+
+
+                @*<div class="col-sm-6">
+            <label class="fw-bold" asp-for="Person.IdentityDocumentType"></label>
+            @Html.DropDownListFor(idt => idt.Person.IdentityDocumentTypeId, Model.IdentityDocumentTypeList,
+            "Seleccione un Tipo de Documento....",
+            new { @class = "form-control", @disabled = "disabled" })
+        </div>*@
             </div>
-            <div class="row px-2">
+                @*<div class="row px-2">
                 <div class="col-sm-6">
                     <label class="fw-bold" asp-for="Person.Names"></label>
                     <input asp-for="Person.Names" disabled class="form-control" />
@@ -91,8 +106,7 @@
                             <i class="far fa-hand-point-left"><span class="px-2 font-menu">Regresar</span></i>
                         </a>
                     </div>
-                </div>
+                </div>*@
             </div>
-        </div>
     </div>
 </div>
