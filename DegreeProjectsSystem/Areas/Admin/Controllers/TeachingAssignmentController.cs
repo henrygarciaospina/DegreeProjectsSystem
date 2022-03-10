@@ -212,41 +212,20 @@ namespace DegreeProjectsSystem.Areas.Admin.Controllers
         //Details TeachingAssigment
         public IActionResult DetailTeachingAssignment(int? id)
         {
-            var config = _unitWork.Config.GetFirst();
+            DetailsTeachingAssignmentView detailsTeachingAssignmentView = new DetailsTeachingAssignmentView();
+            
+            var listTeachers  = _unitWork.TeachingAssignment.GetTeachersById(id.GetValueOrDefault());
 
-            TeachingAssignmentViewModel teachingAssignmentViewModel = new TeachingAssignmentViewModel()
-            {
-                SolicitudeList = _unitWork.Solicitude.GetAll(sl => sl.Active == true, orderBy: sl => sl.OrderBy(sl => sl.TitleDegreeWork)).Select(sl => new SelectListItem
-                {
-                    Text = sl.TitleDegreeWork + " - " + "Acta No. " + sl.ActNumber,
-                    Value = sl.Id.ToString()
-                }).ToList(),
+            detailsTeachingAssignmentView.Teachers = listTeachers.Select(t => t.PersonTypePerson.Person).ToList();
 
-                PersonTypePersonList = _unitWork.PersonTypePerson
-                .GetAll(pe => pe.TypePerson.Id == config.TeacherTypeId, includeProperties: "Person")
-                .Select(pe => new SelectListItem
-                {
-                    Text = pe.Person.Names + " " + pe.Person.Surnames,
-                    Value = pe.Id.ToString()
-                }),
+            detailsTeachingAssignmentView.Solicitude = listTeachers.Select(s => s.Solicitude).FirstOrDefault();
 
-                TeachingFunctionList = _unitWork.TeachingFunction
-                .GetAll(tf => tf.Active, orderBy: tf => tf.OrderBy(tf => tf.Name))
-                .Select(tf => new SelectListItem
-                {
-                    Text = tf.Name,
-                    Value = tf.Id.ToString()
-                }),
-
-            };
-
-            teachingAssignmentViewModel.TeachingAssignment = _unitWork.TeachingAssignment.Get(id.GetValueOrDefault());
-            if (teachingAssignmentViewModel.TeachingAssignment == null)
+            if (detailsTeachingAssignmentView.Solicitude == null)
             {
                 return NotFound();
             }
 
-            return View(teachingAssignmentViewModel);
+            return View(detailsTeachingAssignmentView);
         }
 
         #region API

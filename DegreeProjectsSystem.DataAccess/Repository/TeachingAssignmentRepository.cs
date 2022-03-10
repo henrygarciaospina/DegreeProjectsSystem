@@ -3,6 +3,8 @@ using DegreeProjectsSystem.DataAccess.Data;
 using DegreeProjectsSystem.Models;
 using System.Linq;
 using System;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace DegreeProjectsSystem.DataAccess.Repository
 {
@@ -36,6 +38,20 @@ namespace DegreeProjectsSystem.DataAccess.Repository
                 throw(ex.InnerException);
             }
             
+        }
+
+        public List<TeachingAssignment> GetTeachersById(int teachingAssignmentId)
+        {
+            List<TeachingAssignment> teachings = new List<TeachingAssignment>();
+            var teachingAssignmentDb = _db.TeachingAssigments.FirstOrDefault(ta => ta.Id == teachingAssignmentId);
+            teachings = _db.TeachingAssigments.Where(w => w.SolicitudeId == teachingAssignmentDb.SolicitudeId)
+                           .Include(so=> so.Solicitude)  
+                           .Include(pt => pt.PersonTypePerson)
+                           .Include(pe => pe.PersonTypePerson.Person)
+                           .Include(tc => tc.PersonTypePerson.TypePerson)
+                           .ToList();
+
+            return teachings;
         }
 
     }
