@@ -215,12 +215,15 @@ namespace DegreeProjectsSystem.Areas.Admin.Controllers
             DetailsTeachingAssignmentView detailsTeachingAssignmentView = new DetailsTeachingAssignmentView();
             
             var listTeachers  = _unitWork.TeachingAssignment.GetTeachersById(id.GetValueOrDefault());
+            var listTeachingFunctions = _unitWork.TeachingAssignment.GetTeachersById(id.GetValueOrDefault());
 
             detailsTeachingAssignmentView.Teachers = listTeachers.Select(t => t.PersonTypePerson.Person).ToList();
+            detailsTeachingAssignmentView.TeachingFunctions = listTeachingFunctions.Select(f => f.TeachingFunction).ToList();
 
             detailsTeachingAssignmentView.Solicitude = listTeachers.Select(s => s.Solicitude).FirstOrDefault();
 
-            if (detailsTeachingAssignmentView.Solicitude == null)
+
+            if (detailsTeachingAssignmentView == null)
             {
                 return NotFound();
             }

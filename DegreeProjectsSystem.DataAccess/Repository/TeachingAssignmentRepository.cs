@@ -49,6 +49,7 @@ namespace DegreeProjectsSystem.DataAccess.Repository
                            .Include(pt => pt.PersonTypePerson)
                            .Include(pe => pe.PersonTypePerson.Person)
                            .Include(tc => tc.PersonTypePerson.TypePerson)
+                           .Include(tf=> tf.TeachingFunction)
                            .ToList();
 
             return teachings;
