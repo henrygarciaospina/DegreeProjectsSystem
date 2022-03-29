@@ -18,6 +18,8 @@ namespace DegreeProjectsSystem.DataAccess.Data
         public DbSet<CareerPerson> CareerPeople { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Config> Configs { get; set; }
+
+        public DbSet<DeliveryRecord> DeliveryRecords { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<DepartmentFaculty> DepartmentFaculties { get; set; }
         public DbSet<EmailPerson> EmailPeople { get; set; }
@@ -40,6 +42,8 @@ namespace DegreeProjectsSystem.DataAccess.Data
         public DbSet<ModalitySubmodality> ModalitySubmodalities { get; set; }
         public DbSet<TeachingFunction> TeachingFunctions { get; set; }
         public DbSet<TeachingAssignment> TeachingAssigments { get; set; }
+
+        public DbSet<Tracing> Tracings { get; set; }
         public DbSet<TypePerson> TypePeople { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -60,6 +64,10 @@ namespace DegreeProjectsSystem.DataAccess.Data
 
             modelBuilder.Entity<City>()
                 .HasIndex(c => new { c.Name, c.DepartmentId })
+                .IsUnique();
+
+            modelBuilder.Entity<DeliveryRecord>()
+                .HasIndex(dr => new { dr.StudentRequestId, dr.TracingId })
                 .IsUnique();
 
             modelBuilder.Entity<DepartmentFaculty>()
@@ -143,6 +151,10 @@ namespace DegreeProjectsSystem.DataAccess.Data
 
             modelBuilder.Entity<TeachingFunction>()
                 .HasIndex(tf => tf.Name)
+                .IsUnique();
+
+            modelBuilder.Entity<Tracing>()
+                .HasIndex(t => new { t.ModalitySubmodalityId, t.DeliveryDescription })
                 .IsUnique();
 
             modelBuilder.Entity<TypePerson>()
