@@ -35,6 +35,7 @@ namespace DegreeProjectsSystem.DataAccess.Repository
         public IModalitySubmodalityRepository ModalitySubmodality { get; private set; }
         public ITeachingAssignmentRepository TeachingAssignment { get; private set; }
         public ITeachingFunctionRepository TeachingFunction { get; private set; }
+        public ITracingRepository Tracing { get; private set; }
         public ITypePersonRepository TypePerson { get; private set; }
         public UnitWork(ApplicationDbContext db)
         {
@@ -67,6 +68,7 @@ namespace DegreeProjectsSystem.DataAccess.Repository
             ModalitySubmodality = new ModalitySubmodalityRepository(_db);
             TeachingFunction = new TeachingFunctionRepository(_db);
             TeachingAssignment = new TeachingAssignmentRepository(_db);
+            Tracing = new TracingRepository(_db);
             TypePerson = new TypePersonRepository(_db);
         }
 

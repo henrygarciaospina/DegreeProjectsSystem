@@ -32,6 +32,7 @@ namespace DegreeProjectsSystem.DataAccess.Repository.IRepository
         IModalitySubmodalityRepository ModalitySubmodality { get; }
         ITeachingFunctionRepository TeachingFunction { get; }
         ITeachingAssignmentRepository TeachingAssignment { get; }
+        ITracingRepository Tracing { get; }
         ITypePersonRepository TypePerson { get; }
         void Save();
     }
